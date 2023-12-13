@@ -1,7 +1,7 @@
 # Algorithm
 This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub)..
 
-[백준 문제집]([https://www.acmicpc.net/workbook/view/6779](https://github.com/AnChanUng/baekjoon/tree/main/data_structure))
+[백준 문제집](https://github.com/AnChanUng/baekjoon/tree/main/data_structure)
 |          순번          |        푼 문제         |        문제 번호         |        문제 이름         |         난이도          |        풀이 링크         |
 | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
 | 00 |  :heavy_check_mark:  | <a href="https://www.acmicpc.net/problem/10828" target="_blank">10828</a> | <a href="https://www.acmicpc.net/problem/10828" target="_blank">스택</a> | <img height="25px" width="25px" src="https://static.solved.ac/tier_small/7.svg"/> | <a href="./../solution/data_structure/10828">바로가기</a> |
