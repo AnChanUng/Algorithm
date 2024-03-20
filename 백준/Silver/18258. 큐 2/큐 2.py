@@ -1,35 +1,33 @@
-import sys
 from collections import deque
+import sys
+input = sys.stdin.readline
 
-# 비어있는 큐 만들기
-queue = deque()
-N = int(input())
+n = int(input())
+queue = deque([])
 
-for i in range(N):
-    x = sys.stdin.readline().split()
-
-    if x[0] == 'push':
-        queue.append(int(x[1]))
-    elif x[0] == 'pop':
-        if not queue:
+for i in range(n):
+    command = input().split()
+    if command[0] == 'push':
+        queue.append(command[1])
+    elif command[0] == 'pop':
+        if len(queue) == 0:
             print(-1)
         else:
-            print(queue[0])
-            queue.popleft()
-    elif x[0] == 'size':
+            print(queue.popleft())
+    elif command[0] == 'size':
         print(len(queue))
-    elif x[0] == 'empty':
+    elif command[0] == 'empty':
         if len(queue) == 0:
             print(1)
         else:
             print(0)
-    elif x[0] == 'front':
-        if not queue:
+    elif command[0] == 'front':
+        if len(queue) == 0:
             print(-1)
         else:
             print(queue[0])
-    elif x[0] == 'back':
-        if not queue:
+    elif command[0] == 'back':
+        if len(queue) == 0:
             print(-1)
         else:
             print(queue[-1])
