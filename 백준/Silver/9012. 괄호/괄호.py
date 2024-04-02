@@ -1,19 +1,23 @@
-T = int(input())
+import sys
+input = sys.stdin.readline
 
-for i in range(T):
+n = int(input())
+
+for _ in range(n):
+    line = input()
     stack = []
-    a = input()
-    for j in a:
-        if j == '(':
-            stack.append(j)
-        elif j == ')':
-            if stack:
-                stack.pop()
-            else: # 스택에 괄호가 없을경우 NO
-                print("NO")
+
+    for i in line:
+        if i == '(':
+            stack.append('(')
+        elif i == ')':
+            if len(stack) == 0:
+                stack.append(')')
                 break
+            else:
+                stack.pop()
+
+    if len(stack) != 0:
+        print('NO')
     else:
-        if not stack:
-            print("YES")
-        else:
-            print("NO")
+        print('YES')
