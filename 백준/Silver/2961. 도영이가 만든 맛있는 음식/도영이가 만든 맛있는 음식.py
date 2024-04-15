@@ -1,30 +1,25 @@
-# S : 신맛->곱
-# B : 쓴맛->합
-# N : 재료개수
-# 출력: 신맛 - 쓴맛
 from itertools import combinations
-import sys
-input = sys.stdin.readline
 
-N = int(input())
-s_array = []
-b_array = []
-for _ in range(N):
-    S, B = map(int, input().split())
-    s_array.append(S)
-    b_array.append(B)
+n = int(input())
+sm_array = []
+sm2_array = []
+for _ in range(n):
+    sm, sm2 = map(int, input().split())
+    sm_array.append(sm)
+    sm2_array.append(sm2)
 
-diff = float('inf')
+total = float('inf')
 
-for i in range(1, N+1):
-    idxs = list(combinations(list(range(N)), i))
+for i in range(1, n+1):
+    idxs = list(combinations(list(range(n)), i))
     for food in idxs:
-        s = 1
-        b = 0
+        cnt1 = 1
+        cnt2 = 0
         for j in range(i):
-            s *= s_array[food[j]]
-            b += b_array[food[j]]
-        if abs(s - b) < diff:
-            diff = abs(s - b)
+            cnt1 = cnt1 * sm_array[food[j]]
+            cnt2 = cnt2 + sm2_array[food[j]]
 
-print(diff)
+        if abs(cnt1-cnt2) < total:
+            total = abs(cnt1-cnt2)
+
+print(total)
