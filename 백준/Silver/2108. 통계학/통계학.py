@@ -3,9 +3,7 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-array = []
-for _ in range(n):
-    array.append(int(input()))
+array = [int(input()) for _ in range(n)]
 
 for i in range(4):
     if i == 0:
