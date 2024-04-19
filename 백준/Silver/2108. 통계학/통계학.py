@@ -5,8 +5,7 @@ input = sys.stdin.readline
 n = int(input())
 array = []
 for _ in range(n):
-    num = int(input())
-    array.append(num)
+    array.append(int(input()))
 
 for i in range(4):
     if i == 0:
@@ -25,6 +24,4 @@ for i in range(4):
         else:
             print(cnt[0][0])
     elif i == 3:
-        print(max(array) - min(array))
-    elif i == 4:
         print(max(array) - min(array))
