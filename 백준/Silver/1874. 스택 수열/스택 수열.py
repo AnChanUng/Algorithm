@@ -1,20 +1,20 @@
 n = int(input())
 stack = []
 result = []
-flag = True
 count = 0
+flag = True
 
 for _ in range(n):
     num = int(input())
-    
+
     while count < num:
         count += 1
         stack.append(count)
-        result.append('+')  
+        result.append("+")
 
     if stack[-1] == num:
         stack.pop()
-        result.append('-')
+        result.append("-")
     else:
         flag = False
         break
