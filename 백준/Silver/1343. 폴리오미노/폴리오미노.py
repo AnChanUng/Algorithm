@@ -1,9 +1,8 @@
 board = input()
 
-board = board.replace('XXXX', 'AAAA')
-board = board.replace('XX', 'BB')
+b = board.replace('XXXX', 'AAAA').replace("XX", "BB")
 
-if 'X' in board:
+if 'X' in b:
     print(-1)
 else:
-    print(board)
+    print(b)
