@@ -1,11 +1,11 @@
 array = set(range(1, 10001))
-generated_number = set()
+numbers = set()
 
 for i in range(1, 10001):
-    for j in str(i):
-        i += int(j)
-    generated_number.add(i)
+	for j in str(i):
+		i += int(j)
+	numbers.add(i)
 
-self_num = sorted(array - generated_number)
-for i in self_num:
+generated_number = sorted(array - numbers)
+for i in generated_number:
     print(i)
