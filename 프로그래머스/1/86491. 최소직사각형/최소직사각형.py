@@ -1,12 +1,14 @@
 def solution(sizes):
     
-    max_width = 0
-    max_height = 0
+    w = []
+    h = []
     
-    for size in sizes:
-        width, height = size
-        
-        max_width = max(max_width, width, height)
-        max_height = max(max_height, min(width, height))
-        
-    return max_width * max_height
+    for i in range(len(sizes)):
+        if sizes[i][0] > sizes[i][1]:
+            w.append(sizes[i][0])
+            h.append(sizes[i][1])
+        else:
+            w.append(sizes[i][1])
+            h.append(sizes[i][0])
+    
+    return max(w) * max(h)
