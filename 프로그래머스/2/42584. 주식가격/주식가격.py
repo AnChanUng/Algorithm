@@ -1,6 +1,7 @@
 from collections import deque
 
 def solution(prices):
+    
     queue = deque(prices)
     answer = []
     while queue:
@@ -11,5 +12,4 @@ def solution(prices):
             if current_price > price:
                 break
         answer.append(time)
-    
     return answer
