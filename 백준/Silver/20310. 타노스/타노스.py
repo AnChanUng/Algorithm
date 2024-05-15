@@ -1,11 +1,14 @@
-s = list(map(int, input()))
+s = list(input())
 
-for _ in range(s.count(0)//2):
-    s.remove(0) 
+count_0 = s.count('0') // 2
+count_1 = s.count('1') // 2
 
-for _ in range(s.count(1) // 2):
-    s.remove(1)
+for _ in range(count_0):
+    s = s[::-1]
+    s.remove('0')
+    s = s[::-1]
 
-s.sort()
+for _ in range(count_1):
+    s.remove('1')
 
-print(*s, sep="")
+print(''.join(s))
