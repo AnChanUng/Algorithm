@@ -1,10 +1,9 @@
 n = int(input())
 time = list(map(int, input().split()))
-
 time.sort()
 
-result = 0
 array = []
+result = 0
 for i in time:
     result += i
     array.append(result)
