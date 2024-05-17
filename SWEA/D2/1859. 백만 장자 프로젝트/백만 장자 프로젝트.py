@@ -1,15 +1,14 @@
 t = int(input())
 for test_case in range(1, t+1):
     n = int(input())
-    prices = list(map(int, input().split()))
+    numbers = list(map(int, input().split()))
 
-    max_price = 0
-    max_profit = 0
-
-    for price in prices[::-1]:
-        if price > max_price:
-            max_price = price
+    result = 0
+    total = 0
+    for i in numbers[::-1]:
+        if i > result:
+            result = i
         else:
-            max_profit += max_price - price
+            total += result - i
     
-    print(f'#{test_case}', max_profit)
+    print(f'#{test_case}', total)
