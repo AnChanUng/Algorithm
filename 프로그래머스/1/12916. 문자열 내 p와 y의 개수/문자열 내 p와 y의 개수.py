@@ -1,17 +1,16 @@
 def solution(s):
     
-    s = s.lower()
-    
-    count1 = 0
-    count2 = 0
-    
+    p_count = 0
+    y_count = 0
     for i in s:
-        if i == "p":
-            count1 += 1
-        elif i == "y":
-            count2 += 1
+        if i == "p" or i == "P":
+            p_count += 1
+        elif i == "y" or i == "Y":
+            y_count += 1
+        else:
+            pass
     
-    if count1 == count2:
+    if p_count == y_count:
         return True
     else:
         return False
