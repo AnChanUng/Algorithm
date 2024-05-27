@@ -1,14 +1,10 @@
 def solution(x):
     
-    answer = []
-    count = 0
-    
+    total = 0
     for i in str(x):
-        answer.append(i)
+        total += int(i)
     
-    for j in range(len(answer)):
-        count += int(answer[j])
-         
-    if x % count == 0:
+    if x % total == 0:
         return True
-    return False
+    else:
+        return False
