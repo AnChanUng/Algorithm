@@ -1,10 +1,9 @@
 def solution(n):
     
-    answer = []
-    n = str(n)
+    array = []
+    for i in str(n):
+        array.append(int(i))
     
-    for i in n:
-        i = int(i)
-        answer.append(i)
-    answer.reverse()
-    return answer
+    array.reverse()
+    
+    return array
