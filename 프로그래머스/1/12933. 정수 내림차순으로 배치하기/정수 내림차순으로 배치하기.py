@@ -1,12 +1,13 @@
 def solution(n):
     
-    answer = []
-    answer1 = []
-    
+    array = []
     for i in str(n):
-        answer.append(i)
+        array.append(int(i))
     
-    answer.sort(reverse=True) 
-    # ['8', '7', '3', '2', '1', '1']
+    array.sort(reverse=True)
     
-    return int(''.join(answer))
+    result = ""
+    for i in array:
+        result += str(i)
+    
+    return int(''.join(result))
