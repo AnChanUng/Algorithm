@@ -1,12 +1,11 @@
 def solution(a, b):
     
-    count = 0
-    
+    result = 0
     if a <= b:
         for i in range(a, b+1):
-            count += i
-    elif a > b:
+            result += i
+    else:
         for i in range(b, a+1):
-            count += i
+            result += i
         
-    return count
+    return result
