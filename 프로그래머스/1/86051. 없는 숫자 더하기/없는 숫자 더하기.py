@@ -1,10 +1,13 @@
 def solution(numbers):
-    cnt = 0
-    number = set([0,1,2,3,4,5,6,7,8,9])
     
-    notfind = number - set(numbers)
+    count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     
-    for i in notfind:
-        cnt += i
+    for i in range(len(numbers)):
+        count[numbers[i]] += 1
     
-    return cnt
+    result = 0
+    for j in range(len(count)):
+        if count[j] == 0:
+            result += j
+    
+    return result
