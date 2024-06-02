@@ -1,12 +1,10 @@
 def solution(absolutes, signs):
     
     result = 0
-    
-    for num, sign in zip(absolutes, signs):
-        
-        if sign == True:
-            result += num
+    for i in range(len(signs)):
+        if signs[i] == True:
+            result = result + absolutes[i]
         else:
-            result -= num
+            result = result - absolutes[i]
     
     return result
