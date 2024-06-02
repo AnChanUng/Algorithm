@@ -1,16 +1,14 @@
 def solution(left, right):
-    answer = 0 # 전체합
-    
-    for i in range(left, right+1):
-        result = 0 # 약수의 개수
+    total = 0
+    for num in range(left, right+1):
+        cnt = 0
+        for i in range(1, num+1):
+            if num % i == 0:
+                cnt += 1
         
-        for j in range(1, i+1):
-            if i % j == 0:
-                result += 1 # 약수의 개수
-        
-        if result % 2 == 0:
-            answer += i
+        if cnt % 2 == 0:
+            total += num
         else:
-            answer -= i
-       
-    return answer
+            total -= num
+    
+    return total
