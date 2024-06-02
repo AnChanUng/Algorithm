@@ -1,13 +1,14 @@
 def solution(arr, divisor):
-    answer = []
+    
+    array = []
     
     for i in arr:
         if i % divisor == 0:
-            answer.append(i)
-    answer.sort()
+            array.append(i)
     
-    # 아무것도 없으면
-    if not answer:
-        return [-1]
+    if len(array) == 0:
+        array.append(-1)
     
-    return answer
+    array.sort()
+    
+    return array
