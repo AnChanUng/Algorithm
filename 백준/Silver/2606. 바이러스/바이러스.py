@@ -1,26 +1,21 @@
-import sys
-input = sys.stdin.readline
-
-def dfs(graph, v, visited):
-    global cnt
-    visited[v] = True
-
-    for i in graph[v]:
-        if not visited[i]:
-            cnt += 1
-            dfs(graph, i, visited)
-
+n = int(input())
 number = int(input())
-network = int(input())
 
-graph = [[] for _ in range(number+1)]
-visited = [False] * (number + 1)
-cnt = 0
-
-for i in range(network):
+graph = [[] for _ in range(n+1)]
+for _ in range(number):
     a, b = map(int, input().split())
     graph[a].append(b)
     graph[b].append(a)
 
-dfs(graph, 1, visited)
+cnt = 0
+visited = [False] * (n+1)
+
+def dfs(x):
+    global cnt
+    visited[x] = True
+    for i in graph[x]:
+        if not visited[i]:
+            dfs(i)
+            cnt += 1
+dfs(1)
 print(cnt)
