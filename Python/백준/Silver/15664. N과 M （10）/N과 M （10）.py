@@ -5,7 +5,6 @@ answer = []
 visited = [0] * n
 
 def backtracking(start):
-    
     if len(answer) == m:
         print(*answer)
         return
@@ -14,11 +13,11 @@ def backtracking(start):
     for i in range(n):
         if not visited[i] and remember != numbers[i]:
             if i >= start:
-                visited[i] = 1
+                visited[i] = True
                 answer.append(numbers[i])
                 remember = numbers[i]
                 backtracking(i)
                 answer.pop()
-                visited[i] = 0
+                visited[i] = False
                 
 backtracking(0)
