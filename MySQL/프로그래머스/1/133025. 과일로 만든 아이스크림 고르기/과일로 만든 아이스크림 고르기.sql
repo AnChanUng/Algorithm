@@ -1,0 +1,9 @@
+-- 코드를 입력하세요
+SELECT A.FLAVOR
+FROM FIRST_HALF A
+JOIN ICECREAM_INFO B ON A.FLAVOR = B.FLAVOR
+WHERE A.TOTAL_ORDER > 3000 AND B.INGREDIENT_TYPE = 'fruit_based'
+ORDER BY A.TOTAL_ORDER DESC;
+
+-- FIRST_HALF (출하번호, 아스크림맛, 총주문량) == 주문 정보
+-- ICECREAM_INFO (아스크림 맛, 아스크림성분타입) == 성분 정보
