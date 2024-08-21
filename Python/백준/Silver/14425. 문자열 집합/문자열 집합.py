@@ -1,6 +1,8 @@
 n, m = map(int, input().split())
-
-set_s = set(input() for _ in range(n))
+set_s = set()
+for _ in range(n):
+    word = input()
+    set_s.add(word) 
 
 cnt = 0
 for i in range(m):
