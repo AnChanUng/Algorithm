@@ -1,6 +1,6 @@
-house = int(input())
-antena = list(map(int, input().split()))
+n = int(input())
+data = list(map(int, input().split()))
 
-antena.sort()
+data.sort()
 
-print(antena[(house-1) // 2])
+print(data[(n-1)//2])
