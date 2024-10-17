@@ -1,23 +1,22 @@
-from collections import deque
-
 n, w, l = map(int, input().split())
 trucks = list(map(int, input().split()))
-bridge = deque([0] * w)
-current_weight = 0
+
+bridge = [0] * w
+weight = 0
 time = 0
-
-for truck in trucks:
-    while True:
-        time += 1
-        current_weight -= bridge.popleft()
-
-        if current_weight + truck <= l:
-            bridge.append(truck)
-            current_weight += truck
-            break
+while True:
+    weight -= bridge.pop(0)
+    
+    if trucks:
+        if weight + trucks[0] <= l: 
+            bridge.append(trucks[0])
+            weight += trucks[0]
+            trucks.pop(0)
         else:
             bridge.append(0)
+    time += 1
 
-time += w
+    if not bridge:
+        break
 
 print(time)
