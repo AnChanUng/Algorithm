@@ -1,26 +1,23 @@
 def solution(answers):
-    
     number1 = [1, 2, 3, 4, 5]
     number2 = [2, 1, 2, 3, 2, 4, 2, 5]
     number3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
-    count1, count2, count3 = 0, 0, 0
-    
+    cnt1 = cnt2 = cnt3 = 0
     for i in range(len(answers)):
-        if number1[i%5] == answers[i]:
-            count1 += 1
-        if number2[i%8] == answers[i]:
-            count2 += 1
-        if number3[i%10] == answers[i]:
-            count3 += 1
+        if answers[i] == number1[i%len(number1)]:
+            cnt1 += 1
+        
+        if answers[i] == number2[i%len(number2)]:
+            cnt2 += 1
+        
+        if answers[i] == number3[i%len(number3)]:
+            cnt3 += 1
     
-    k = max(count1, count2, count3)
-    answer = []
+    count = [cnt1, cnt2, cnt3]
     
-    if k == count1:
-        answer.append(1)
-    if k == count2:
-        answer.append(2)
-    if k == count3:
-        answer.append(3)
+    array = []
+    for i in range(len(count)):
+        if count[i] == max(count):
+            array.append(i+1)
     
-    return answer
+    return array
