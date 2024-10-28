@@ -1,14 +1,13 @@
 def solution(sizes):
     
-    w = []
-    h = []
-    
+    max_sizes = 0
     for i in range(len(sizes)):
-        if sizes[i][0] > sizes[i][1]:
-            w.append(sizes[i][0])
-            h.append(sizes[i][1])
-        else:
-            w.append(sizes[i][1])
-            h.append(sizes[i][0])
+        max_sizes = max(max(sizes[i]), max_sizes)
     
-    return max(w) * max(h)
+    min_sizes = 0
+    for i in range(len(sizes)):
+        min_sizes = max(min(sizes[i]), min_sizes) 
+    
+    answer = min_sizes * max_sizes
+    
+    return answer
