@@ -1,20 +1,19 @@
 def solution(k, tangerine):
-    answer = 0
-    dict = {}
-    tangerine.sort()
-    
-    for i in tangerine:
-        if i in dict:
-            dict[i] += 1
+        
+    dic = {}
+    for i in range(len(tangerine)):
+        if tangerine[i] in dic:
+            dic[tangerine[i]] += 1
         else:
-            dict[i] = 1
+            dic[tangerine[i]] = 1
     
-    d = sorted(dict.items(), key = lambda x: x[1], reverse=True)
+    sorted_dic = sorted(dic.items(), key=lambda item: item[1], reverse=True)
     
-    for i in d:
-        k = k - i[1]
-        answer += 1
-        if (k <= 0):
+    cnt = 0
+    for a, b in sorted_dic:
+        k = k - b
+        cnt += 1
+        if k <= 0:
             break
-            
-    return answer
+    
+    return cnt
