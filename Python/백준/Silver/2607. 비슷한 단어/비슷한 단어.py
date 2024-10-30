@@ -1,18 +1,18 @@
-number = int(input())
+n = int(input())
 target = list(input())
-answer = 0
 
-for i in range(number-1):
+res = 0
+for _ in range(n-1):
+    copy_target = target[:]
     word = input()
     cnt = 0
-    compare = target[:]  
-    
     for i in word:
-        if i in compare:
-            compare.remove(i)
+        if i in copy_target:
+            copy_target.remove(i)
         else:
             cnt += 1
-    if cnt < 2 and len(compare) < 2:
-        answer += 1
 
-print(answer)
+    if cnt < 2 and len(copy_target) < 2:
+        res += 1
+
+print(res)
