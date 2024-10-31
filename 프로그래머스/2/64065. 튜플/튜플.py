@@ -1,20 +1,15 @@
 def solution(s):
+    answer = []
     
-    s = s[2:-2].split("},{")
-    arr = []
+    s = s[2:-2].split('},{')
+    s = [w.split(',') for w in s]
+    
+    s.sort(key=lambda x: len(x))
+    
     for i in range(len(s)):
-        s1 = s[i].split(",")
-        arr.append(set(s1))
+        for j in range(len(s[i])):
+            s[i][j] = int(s[i][j])
+            if s[i][j] not in answer:
+                answer.append(s[i][j])
     
-    arr.sort(key=lambda x: len(x))
-    
-    ans = set()
-    res = []
-    for a in arr:
-        tmp = a - ans
-        res.append(list(tmp)[0])
-        ans = ans | tmp
-    
-    res = [int(i) for i in res]
-    return res
-    
+    return answer
