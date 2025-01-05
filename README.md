@@ -1,2 +1,1 @@
-## 코딩테스트
-BOJ, PRO, SWEA
+주: Java 부: Python
