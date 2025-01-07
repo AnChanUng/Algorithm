@@ -3,7 +3,7 @@ class Solution {
         
         long total = 0; // 놀이기구 이용 금액
         for(int i=1; i<=count; i++) {
-            total += (long) i * price;
+            total += i * price;
         }
         
         long result = total - money;
