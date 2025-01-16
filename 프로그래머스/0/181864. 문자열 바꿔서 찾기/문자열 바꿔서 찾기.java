@@ -3,10 +3,10 @@ class Solution {
         int answer = 0;
         
         StringBuilder sb = new StringBuilder();
-        for(int i : myString.toCharArray()) {
-            if(i == 'A') {
+        for(char ch : myString.toCharArray()) {
+            if(ch == 'A') {
                 sb.append('B');
-            } else if(i == 'B') {
+            } else if(ch == 'B') {
                 sb.append('A');
             }
         }
