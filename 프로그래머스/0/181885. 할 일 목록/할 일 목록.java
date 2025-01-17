@@ -10,8 +10,11 @@ class Solution {
             }
         }
         
-        // List -> String type 배열로 변환
-        String[] arr = answer.toArray(new String[0]);
+        String[] arr = new String[answer.size()];
+        
+        for(int i=0; i<answer.size(); i++) {
+            arr[i] = answer.get(i);
+        }
         
         return arr;
     }
