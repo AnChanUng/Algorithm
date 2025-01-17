@@ -6,12 +6,10 @@ class Solution {
         int num1 = Integer.parseInt(str1+str2);
         int num2 = 2 * a * b; 
         
-        if(num1 > num2) {
+        if(num1 >= num2) {
             return num1;
-        } else if (num1 < num2) {
-            return num2;
         } else {
-            return num1;
-        }
+            return num2;
+        } 
     }
 }
