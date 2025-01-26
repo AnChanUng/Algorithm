@@ -8,9 +8,9 @@ class Solution {
         for(int i=0; i<participant.length; i++) {
             map.put(participant[i], map.getOrDefault(participant[i], 0) + 1);
         }
-
-        for(int i=0; i<completion.length; i++) {
-            map.put(completion[i], map.get(completion[i])-1);
+        
+        for(int j=0; j<completion.length; j++) {
+            map.put(completion[j], map.get(completion[j])-1);
         }
         
         for(String key : map.keySet()) {
