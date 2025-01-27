@@ -4,6 +4,6 @@
 ## Algorithm
 - 문자열 시뮬레이션 완전탐색 그리디
 - 순열 조합 부분집합
-- 자료구조
+- [자료구조](https://github.com/AnChanUng/Algorithm/blob/main/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0.md)
 - DFS/BFS
 - DP
