@@ -14,13 +14,8 @@ class Main {
             arr[i][1] = inputs[1];
         }
 
-        Arrays.sort(arr, new Comparator<String[]>() {
-            @Override
-            public int compare(String[] o1, String[] o2) {
-                return Integer.parseInt(o1[0]) - Integer.parseInt(o2[0]);
-           } 
-        });
-
+        Arrays.sort(arr, (o1, o2) -> Integer.parseInt(o1[0]) - Integer.parseInt(o2[0]));
+        
         for(int i=0; i<n; i++) {
             System.out.print(arr[i][0] + " ");
             System.out.println(arr[i][1]);
