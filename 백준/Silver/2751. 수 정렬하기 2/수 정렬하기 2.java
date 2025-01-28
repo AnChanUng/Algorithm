@@ -7,16 +7,19 @@ class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
 
-        int[] arr = new int[n];
+        ArrayList<Integer> list = new ArrayList<>();
         for(int i=0; i<n; i++) {
             int num = Integer.parseInt(br.readLine());
-            arr[i] = num;
+            list.add(num);
         }
 
-        Arrays.sort(arr);
+        Collections.sort(list);
 
-        for(int a : arr) {
-            System.out.println(a);
+        StringBuilder sb = new StringBuilder();
+        
+        for(int value : list) {
+            sb.append(value).append('\n');
         }
+        System.out.println(sb);
     }
 }
