@@ -21,13 +21,13 @@ class Main {
             }
 
             int prior = 0;
-            
+
             while(!q.isEmpty()) {
                 int[] current = q.poll();
                 boolean isPrint = true;
 
                 for(int[] a : q) {
-                    if(a[1] > current[1]) {
+                    if(current[1] < a[1]) {
                         isPrint = false;
                         break;
                     }
@@ -38,7 +38,7 @@ class Main {
                     if(current[0] == m) {
                         System.out.println(prior);
                         break;
-                    }
+                    } 
                 } else {
                     q.offer(current);
                 }
