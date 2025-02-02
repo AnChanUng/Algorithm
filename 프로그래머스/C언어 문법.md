@@ -28,9 +28,6 @@ int main () {
 	return 0;
 }
 ```
-- int Value_1 = 0; => int 자료형의 Value_1 변수를 선언하고 초기값을 0으로 한다.
-- char Value_2 = 'A'; => char 자료형의 Value_2 변수를 선언하고 초기값을 'A'로 한다.
-- float Value_3 = 3.14; => float 자료형의 Value_3 변수를 선언하고 초기값을 3.14로 한다.
 - scanf("%d", $Value_1); => 콘솔에서 정수형을 입력받아 Value_1 변수에 저장한다.
 
 ## 함수 선언
@@ -63,8 +60,6 @@ int main () {
 	}
 	return 0;
 }
-- for (int i = 0; i < 5; i++)=> 0부터 4까지 반복하는 for문 선언.
-- printf("%d ", i);=> 반복되는 동안 현재의 i 값을 출력.
 ```
 
 ### while문
