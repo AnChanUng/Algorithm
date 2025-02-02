@@ -12,6 +12,7 @@ class Main {
 
         HashMap<String, Integer> map = new HashMap<>();
         HashMap<Integer, String> reverseMap = new HashMap<>();
+        
         for(int i=1; i<=n; i++) {
             String poketmon = br.readLine();
             map.put(poketmon, i);
@@ -21,10 +22,9 @@ class Main {
         for(int j=0; j<m; j++) {
             String problem = br.readLine();
 
-            try{
-                int problemNumber = Integer.parseInt(problem);
-                System.out.println(reverseMap.get(problemNumber));
-            } catch(NumberFormatException e) {
+            if(Character.isDigit(problem.charAt(0))) {
+                System.out.println(reverseMap.get(Integer.parseInt(problem)));
+            } else {
                 System.out.println(map.get(problem));
             }
         }
