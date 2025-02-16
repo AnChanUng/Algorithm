@@ -3,16 +3,17 @@
 #include <stdlib.h>
 
 int solution(int a, int b) {
+    char string_ab[10];
+    char string_ba[10];
     
-    char num1[9];
-    char num2[9];
+    sprintf(string_ab, "%d%d", a, b);
+    sprintf(string_ba, "%d%d", b, a);
     
-    snprintf(num1, 9, "%d%d\0", a, b);
-    snprintf(num2, 9, "%d%d\0", b, a);
-    
-    if (atoi(num1) >= atoi(num2)) {
-        return atoi(num1);
+    int num_ab = atoi(string_ab);
+    int num_ba = atoi(string_ba);
+    if(num_ab > num_ba) {
+        return num_ab;
     } else {
-        return atoi(num2);
+        return num_ba;
     }
 }
