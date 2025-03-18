@@ -15,6 +15,7 @@
 
 ## C++
 - [가상함수](https://good-abacus-b37.notion.site/virtual-1b2c64f682038044902efc8239bb8412?pvs=4)
+- [memset](https://good-abacus-b37.notion.site/memset-1bac64f68203806d8fede9de0102029b?pvs=4)
 
 ## Java
 - [도서] 자바의 정석 ✅
