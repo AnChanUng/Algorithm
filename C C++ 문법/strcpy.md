@@ -7,8 +7,8 @@ char *strcpy(char *dest, const char *src);
 - src 문자열을 dest 문자열에 복사하는 함수
 - 복사된 문자열 끝에는 자동으로 널문자('\0')가 추가
 
-⚠️ 주의사항
-- dest의 공간이 src보다 반드시 커야 합니다.
+**주의사항**
+> dest의 공간이 src보다 반드시 커야 합니다.
 
 ## strcnpy()
 ```
