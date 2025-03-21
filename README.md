@@ -13,6 +13,7 @@
 - [도서] 열혈 C 프로그래밍 ✅
 - [도서] C로 배우는 쉬운 자료구조
 - [fopen, fclose, fputs](https://github.com/AnChanUng/Algorithm/tree/main/C%20C++%20%EB%AC%B8%EB%B2%95)
+- [strcpy, strncpy](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/strcpy.md)
 
 ## C++
 - [가상함수](https://good-abacus-b37.notion.site/virtual-1b2c64f682038044902efc8239bb8412?pvs=4)
