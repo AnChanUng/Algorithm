@@ -40,3 +40,18 @@ FILE* fopen(const char* filename, const char* mode);
 
 **fopen() 사용 시 주의할 점**
 > 파일 경로를 적을 때 역슬래시(\)를 2번 써줘야 됩니다.
+
+## fputs()
+```
+int fputs(const char *str, FILE *stream);
+```
+- 지정한 문자열(str)을 주어진 파일 포인터(stream)가 가리키는 파일에 기록합니다.
+- 문자열 끝의 NULL('\0') 문자는 기록하지 않습니다.
+- 기록 성공 시 음수가 아닌 값을, 실패 시 EOF를 반환합니다.
+
+## fclose()
+```
+int fclose(FILE *stream);
+```
+- 파일 포인터로 열린 파일을 닫아줍니다.
+- 파일이 정상적으로 닫히면 0을, 실패하면 EOF를 반환합니다.
