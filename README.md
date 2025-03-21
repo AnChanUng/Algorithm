@@ -15,6 +15,7 @@
 - [fopen, fclose, fputs](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/fopen.md)
 - [strcpy, strncpy](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/strcpy.md)
 - [getenv](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/getenv.md)
+- [shmget, shmctl](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/shmget.md)
 
 ## C++
 - [가상함수](https://good-abacus-b37.notion.site/virtual-1b2c64f682038044902efc8239bb8412?pvs=4)
