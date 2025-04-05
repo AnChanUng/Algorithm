@@ -23,12 +23,3 @@
 ## C++
 - [가상함수](https://good-abacus-b37.notion.site/virtual-1b2c64f682038044902efc8239bb8412?pvs=4)
 - [memset](https://good-abacus-b37.notion.site/memset-1bac64f68203806d8fede9de0102029b?pvs=4)
-
-## Java
-- [도서] 자바의 정석 ✅
-- [도서] 모던 자바 인 액션
-- [도서] 이펙티브 자바
-
-## Python
-- [도서] 점프 투 파이썬 ✅
-- [도서] 이것이 취업을 위한 코딩 테스트다 ✅
