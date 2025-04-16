@@ -14,6 +14,7 @@
 - [strcpy, strncpy](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/strcpy.md)
 - [getenv](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/getenv.md)
 - [shmget, shmctl](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/shmget.md)
+- [substr, substrb](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/substr.md)
 - [Segmentation Fault & Core Dump](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/segmentation.md)
 
 ## C++
