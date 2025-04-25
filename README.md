@@ -7,7 +7,7 @@
 
 ## C
 - [도서] 열혈 C 프로그래밍 ✅
-- [도서] C로 배우는 쉬운 자료구조
+- [도서] C로 배우는 쉬운 자료구조 - 진행중
 - [C 문법](https://good-abacus-b37.notion.site/C-190c64f6820380d3a77be022e12ff4cf?pvs=4)
 - [fopen, fclose, fputs](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/fopen.md)
 - [popen](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/popen.md)
