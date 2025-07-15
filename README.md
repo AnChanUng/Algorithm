@@ -18,3 +18,4 @@
 ## C++
 - [가상함수](https://good-abacus-b37.notion.site/virtual-1b2c64f682038044902efc8239bb8412?pvs=4)
 - [memset](https://good-abacus-b37.notion.site/memset-1bac64f68203806d8fede9de0102029b?pvs=4)
+- [strptime](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/strptime.md)
