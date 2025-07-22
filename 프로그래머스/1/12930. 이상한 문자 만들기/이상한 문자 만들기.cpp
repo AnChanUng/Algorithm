@@ -4,7 +4,6 @@
 using namespace std;
 
 string solution(string s) {
-    string answer = "";
     int idx = 0;
     
     for(int i=0; i<s.size(); i++) {
@@ -14,7 +13,7 @@ string solution(string s) {
         }
         
         if(idx % 2 == 0) {
-            s[i] = toupper(s[i]);
+            s[i] = toupper(s[i]);       
         } else {
             s[i] = tolower(s[i]);
         }
