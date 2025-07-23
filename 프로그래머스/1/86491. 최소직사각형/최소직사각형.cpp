@@ -4,15 +4,15 @@
 using namespace std;
 
 int solution(vector<vector<int>> sizes) {
-    int max_w = 0;
-    int max_h = 0;
+    int max_width = 0;
+    int max_height = 0;
     
     for(const auto& v : sizes) {
-        int w = max(v[0], v[1]);
-        int h = min(v[0], v[1]);
-        max_w = max(max_w, w);
-        max_h = max(max_h, h);
+        int width = max(v[0], v[1]);
+        int height = min(v[0], v[1]);
+        max_width = max(max_width, width);
+        max_height = max(max_height, height);
     }
     
-    return max_w * max_h;
+    return max_width * max_height;
 }
