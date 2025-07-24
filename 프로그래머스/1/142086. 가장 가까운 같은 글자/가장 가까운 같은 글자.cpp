@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <iostream>
 using namespace std;
 
 vector<int> solution(string s) {
@@ -10,9 +11,9 @@ vector<int> solution(string s) {
     for(int i=0; i<s.size(); i++) {
         char c = s[i];
         if(lastIndex.find(c) == lastIndex.end()) {
-            answer.push_back(-1);
+            answer.push_back(-1);    
         } else {
-            answer.push_back(i - lastIndex[c]);
+            answer.push_back(i-lastIndex[c]);
         }
         lastIndex[c] = i;
     }
