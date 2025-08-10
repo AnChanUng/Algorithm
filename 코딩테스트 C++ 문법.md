@@ -1,3 +1,10 @@
+### 문자열
+```
+#include <cctype>
+toupper(문자) // 대문자로 변경
+tolower(문자) // 소문자로 변경
+```
+
 ### 정렬
 ```
 #include <algorithm>
