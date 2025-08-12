@@ -1,7 +1,7 @@
 ### 문자열
 ```
 #include <string>
-bach() // 마지막 문자 가져오기
+back() // 마지막 문자 가져오기
 pop_back() // 마지막 문자 삭제
 push_back(문자) // 마지막에 문자 추가
 
