@@ -1,14 +1,13 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
-string toBinary(int n, int &cnt) {
+string toBinary(int n) {
     string str = "";
-    cnt = 0;
+    int cnt = 0;
     while(n > 0) {
-        if(n % 2 == 1) {
+        if(n % 2 == 0) {
             str += '1';
             cnt++;
         } else {
@@ -16,21 +15,19 @@ string toBinary(int n, int &cnt) {
         }
         n /= 2;
     }
-    reverse(str.begin(), str.end());
     return str;
 }
 
 int solution(int n) {
-    int targetcnt = 0;
-    toBinary(n, targetcnt);
+    int answer = 0;
     
-    int x = n + 1;
     while(true) {
-        int ones = 0;
-        toBinary(x, ones);
-        if(ones == targetcnt) {
-            return x;
+        n++;
+        toBinary(n);
+        if(number == answer) {
+            break;
         }
-        x++;
     }
+    
+    return answer;
 }
