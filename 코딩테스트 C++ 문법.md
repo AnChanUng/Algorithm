@@ -27,10 +27,15 @@ sort(A.begin(), A.end(), greater<int>()) // 내림차순
 #include <stack>
 
 #include <queue>
+queue<int> q;
+queue<pair<int, int>> q;
 q.push(10) // 뒤에 삽입
 q.front() // 맨 앞 요소 반환       
 q.back() // 맨 뒤 요소 반환        
 q.pop() // 맨 앞 요소 삭제         
 q.empty() // 비었는지 확인       
 q.size() // 크기 확인
+
+priority_queue<int> mx // 우선순위 큐 자료구조
+mx.top() // 가장 큰 값
 ```
