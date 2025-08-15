@@ -29,6 +29,8 @@ sort(A.begin(), A.end(), greater<int>()) // 내림차순
 #include <queue>
 queue<int> q;
 queue<pair<int, int>> q;
+q.front().first // pair 자료형의 첫 번째 값
+q.front().second // pair 자료형의 두번째 값
 q.push(10) // 뒤에 삽입
 q.front() // 맨 앞 요소 반환       
 q.back() // 맨 뒤 요소 반환        
