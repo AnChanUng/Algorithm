@@ -41,3 +41,16 @@ q.size() // 크기 확인
 priority_queue<int> mx // 우선순위 큐 자료구조
 mx.top() // 가장 큰 값
 ```
+
+### 해시
+```
+#include <unordered_map> // dict
+#include <unordered_set> // set
+
+insert({k, v}) 
+erase(key)
+find(key)  // 키 iterator 반환 없으면 end()
+count(key) // 해당 key 개수 반환
+size()
+empty()
+```
