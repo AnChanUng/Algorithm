@@ -2,6 +2,8 @@
 ```
 #include <algorithm>
 *max_element(priorities.begin(), priorities.end()); // 가장 큰 수
+min(a[0], a[1]) 
+min(a[0], a[1]) 
 ```
 ### 문자열
 ```
