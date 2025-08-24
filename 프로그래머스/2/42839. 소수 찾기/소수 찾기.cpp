@@ -1,7 +1,6 @@
 #include <string>
 #include <vector>
 #include <set>
-
 using namespace std;
 
 set<int> numberSet;
@@ -23,9 +22,8 @@ void makeCombination(string comb, string others) {
     if(comb != "") {
         numberSet.insert(stoi(comb));
     }
-    
     for(int i=0; i<others.size(); i++) {
-        makeCombination(comb + others[i], others.substr(0, i) + others.substr(i + 1));
+        makeCombination(comb + others[i], others.substr(0, i) + others.substr(i+1));
     }
 }
 
@@ -37,7 +35,6 @@ int solution(string numbers) {
         if(isPrime(number)) {
             answer++;
         }
-    }    
-
+    }
     return answer;
 }
