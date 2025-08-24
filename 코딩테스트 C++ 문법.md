@@ -3,18 +3,23 @@
 #include <algorithm>
 *max_element(priorities.begin(), priorities.end()); // 가장 큰 수
 min(a[0], a[1]) 
-min(a[0], a[1]) 
+min(a[0], a[1])
+
+#include <cmath>
+sqrt(x) // 제곱근 
 ```
 ### 문자열
 ```
 #include <string>
-back() // 마지막 문자 가져오기
-pop_back() // 마지막 문자 삭제
+back()          // 마지막 문자 가져오기
+pop_back()      // 마지막 문자 삭제
 push_back(문자) // 마지막에 문자 추가
+stoi("문자")    // string -> int
+to_string(숫자) // int -> string
 
 #include <cctype>
-toupper(문자) // 대문자로 변경
-tolower(문자) // 소문자로 변경
+toupper(문자)  // 대문자로 변경
+tolower(문자)  // 소문자로 변경
 ```
 
 ### 정렬
@@ -44,15 +49,30 @@ priority_queue<int> mx // 우선순위 큐 자료구조
 mx.top() // 가장 큰 값
 ```
 
-### 해시
+### 집합/해시
 ```
-#include <unordered_map> // dict
-#include <unordered_set> // set
+#include <set>
+set<int> s;
+s.insert(x)
+s.erase(x) 
+s.find(x)  // iterator 반환, 없으면 s.end()
+s.count(x) // 존재 여부 (0 or 1)
+s.size()
+s.empty()
 
-insert({k, v}) 
-erase(key)
-find(key)  // 키 iterator 반환 없으면 end()
-count(key) // 해당 key 개수 반환
-size()
-empty()
+#include <unordered_set> // 해시 기반 set
+#include <unordered_map> // dict
+```
+
+### 순열/조합
+```
+#include <algorithm>
+next_permutation(v.begin(), v.end()) // 다음 순열 (없으면 false)
+perv_permutation(v.begin(), v.end()) // 이전 순열
+```
+
+### 누적합
+```
+#include <numeric>
+accmulate(v.begin(), v.end(), 0) // 벡터 합
 ```
