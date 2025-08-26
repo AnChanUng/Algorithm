@@ -2,8 +2,8 @@
 ```
 #include <algorithm>
 *max_element(priorities.begin(), priorities.end()); // 가장 큰 수
-min(a[0], a[1]) 
-min(a[0], a[1])
+min(a[0], a[1]), min(a[0], a[1])
+fill(arr, arr+5, -1) // arr[0]부터 arr[4]까지 -1로 채움
 
 #include <cmath>
 sqrt(x) // 제곱근 
