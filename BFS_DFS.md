@@ -17,49 +17,14 @@
 - 시작점이 여러 개    (7576) -> vis
 - 시작점이 두 종류    (4179) -> vis
 - 1차원에서의 BFS     (1697)
-```
-#include <bits/stdc++.h>
-using namespace std;
-#define X first
-#define Y second
-int board[502][502];
-bool vis[502][502];
-int dx[4] = {1, 0, -1, 0};
-int dy[4] = {0, 1, 0, -1};
-int n, m;
 
-int main(void) {
-    for(int i=0; i<n; i++) {
-        for(int j=0; j<m; j++) {
-            cin >> board[i][j];
-        }
-    }
-    int mx = 0;
-    int num = 0;
-    for(int i=0; i<n; i++) {
-        for(int j=0; j<m; j++) {
-            if(vis[i][j] || board[i][j] == 0) continue;
-            num++;
-            queue<pair<int, int>> q;
-            vis[i][j] = 1;
-            q.push({i, j});
-            int area = 0;
-            while(!q.empty()) {
-                area++;
-                pair<int, int> cur = q.front(); q.pop();
-                for(int dir=0; dir<4; dir++) {
-                     int nx = cur.X + dx[dir];
-                     int ny = cur.Y + dy[dir];
-                     if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-                     if(vis[nx][ny] || board[nx][ny] != 1) continue;
-                     vis[nx][ny] = 1;
-                     q.push({nx, ny});
-                }                   
-            }
-            mx = max(mx, area);
-        }
-    }
-}
-```
 ### Backtracking
 불필요한 탐색을 하지 않고, 이전 단계로 돌아와 다른 후보해를 탐색해 나가는 방법
+- N-Queen
+
+### 시뮬레이션
+1. 격자 이동 시뮬레이션 (로봇청소기(14503), 뱀(3190), 구슬 탈출(13460))
+2. 상태 변화 시뮬레이션 (토마토, 불!)
+3. 완전탐색 + 시뮬레이션 (감시, 치킨배달, 12100)
+4. 회전 (스티커 붙이기(18808), 테트로미노(14500))
+5. 큐/덱 시뮬레이션 (프린터 큐(1966), 회전하는 큐(1021))
