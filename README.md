@@ -5,7 +5,7 @@
 - [코딩테스트를 위한 Java 문법](https://github.com/AnChanUng/Algorithm/blob/main/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%90%EB%B0%94%20%EB%AC%B8%EB%B2%95.md)
 - [코딩테스트를 위한 C++ 문법](https://github.com/AnChanUng/Algorithm/blob/main/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%20C%2B%2B%20%EB%AC%B8%EB%B2%95.md)
 - [C 문법](https://good-abacus-b37.notion.site/C-190c64f6820380d3a77be022e12ff4cf?pvs=4)
-- [BFS, DFS, Backtracking](https://github.com/AnChanUng/Algorithm/blob/main/BFS_DFS.md)
+- [알고리즘 빈출 유형](https://github.com/AnChanUng/Algorithm/blob/main/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%EC%9C%A0%ED%98%95%EB%B3%84.md)
 
 ## C 
 - [fopen, fclose, fputs](https://github.com/AnChanUng/Algorithm/blob/main/C%20C%2B%2B%20%EB%AC%B8%EB%B2%95/fopen.md)
