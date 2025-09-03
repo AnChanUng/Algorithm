@@ -8,6 +8,7 @@ int board1[10][10];
 int board2[10][10];
 int n, m;
 vector<pair<int, int>> cctv;
+
 void upd(int x, int y, int dir) {
     dir %= 4;
     while(true) {
@@ -21,14 +22,12 @@ void upd(int x, int y, int dir) {
 }
 
 int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
     cin >> n >> m;
     int mn = 0;
     for(int i=0; i<n; i++) {
         for(int j=0; j<m; j++) {
             cin >> board1[i][j];
-            if(board1[i][j] != 0 && board1[i][j] != 6) {
+            if(board1[i][j] != 6 && board1[i][j] != 0) {
                 cctv.push_back({i, j});
             }
             if(board1[i][j] == 0) mn++;
@@ -37,7 +36,7 @@ int main(void) {
     for(int tmp=0; tmp<(1<<(2*cctv.size())); tmp++) {
         for(int i=0; i<n; i++) {
             for(int j=0; j<m; j++) {
-                board2[i][j] = board1[i][j];                    
+                board2[i][j] = board1[i][j];
             }
         }
         int brute = tmp;
@@ -56,8 +55,8 @@ int main(void) {
                 upd(x, y, dir+1);
             } else if(board1[x][y] == 4) {
                 upd(x, y, dir);
-                upd(x, y, dir+1);
                 upd(x, y, dir+2);
+                upd(x, y, dir+3);
             } else {
                 upd(x, y, dir);
                 upd(x, y, dir+1);
@@ -65,10 +64,10 @@ int main(void) {
                 upd(x, y, dir+3);
             }
         }
-        int val=0;
+        int val = 0;
         for(int i=0; i<n; i++) {
             for(int j=0; j<m; j++) {
-                val += (board2[i][j] == 0);
+                if(board2[i][j] == 0) val++;
             }
         }
         mn = min(mn, val);
