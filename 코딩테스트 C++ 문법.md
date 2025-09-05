@@ -29,8 +29,14 @@ tolower(문자)  // 소문자로 변경
 ### 정렬
 ```
 #include <algorithm>
-sort(A.begin(), A.end()) // 오름차순
-sort(A.begin(), A.end(), greater<int>()) // 내림차순
+sort(a.begin(), a.end()) // 오름차순
+sort(a.begin(), a.end(), greater<int>()) // 내림차순
+
+int compare(pair<int, int> a, pair<int, int> b) {
+    if(a.Y == b.Y) return a.X < b.X;
+    return a.Y < b.Y;
+}
+sort(a.begin(), a.end(), compare); // 두 번째 기준 정렬, 같으면 첫 번째 기준 정렬
 ```
 
 ### 스택/큐
