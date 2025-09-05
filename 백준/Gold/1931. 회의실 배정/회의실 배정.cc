@@ -4,6 +4,15 @@ using namespace std;
 #define Y second
 int n;
 int start_time, end_time;
+
+int compare(pair<int, int> a, pair<int, int> b) {
+    if(a.Y == b.Y) {
+        return a.X < b.X;
+    } else {
+        return a.Y < b.Y;
+    }
+}
+
 int main(void) {
     cin >> n; // 회의 수
     vector<pair<int, int>> info;
@@ -12,13 +21,8 @@ int main(void) {
         cin >> start_time >> end_time; // 회의 시작시간 끝나는 시간
         info.push_back({start_time, end_time});
     }
-    sort(info.begin(), info.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
-        if(a.Y == b.Y) {
-            return a.X < b.X;
-        } else {
-            return a.Y < b.Y;
-        }
-    });
+    sort(info.begin(), info.end(), compare);
+        
     int cnt = 0;
     int cur = 0;
     for(int i=0; i<n; i++) {
