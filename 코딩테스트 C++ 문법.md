@@ -31,6 +31,7 @@ tolower(문자)  // 소문자로 변경
 #include <algorithm>
 sort(a.begin(), a.end()) // 오름차순
 sort(a.begin(), a.end(), greater<int>()) // 내림차순
+iota(a.begin(), a.end(), 0); // 0, 1, 2, 3, 4, ... n-1 까지 생성
 
 int compare(pair<int, int> a, pair<int, int> b) {
     if(a.Y == b.Y) return a.X < b.X;
