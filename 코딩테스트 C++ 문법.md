@@ -80,7 +80,22 @@ s.empty()
 ### 순열/조합
 ```
 #include <algorithm>
-next_permutation(v.begin(), v.end()) // 다음 순열 (없으면 false)
+
+vector<int> a = {1, 2, 3}
+sort(a.begin(), a.end());
+do {
+    for(int x : v) cout << x << " ";
+    cout << "\n";
+} while(next_permutation(a.begin(), a.end()));
+
+출력
+1 2 3
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1
+
 prev_permutation(v.begin(), v.end()) // 이전 순열
 ```
 
