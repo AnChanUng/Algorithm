@@ -7,7 +7,6 @@ int dy[4] = {0, 1, 0, -1};
 string board[27];
 int vis[27][27];
 int n;
-
 int main(void) {
     cin >> n;
     for(int i=0; i<n; i++) {
@@ -16,12 +15,12 @@ int main(void) {
     vector<int> maps;
     for(int i=0; i<n; i++) {
         for(int j=0; j<n; j++) {
+            int cnt = 0;
             if(board[i][j] == '1' && vis[i][j] == false) {
-                queue<pair<int, int>> q;
-                q.push({i, j});
-                vis[i][j] = true;
-                //cout << "i: " << i << " j: " << j << "\n";
                 int cnt = 0;
+                queue<pair<int, int>> q;
+                vis[i][j] = true;
+                q.push({i, j});
                 while(!q.empty()) {
                     auto cur = q.front(); q.pop();
                     cnt++;
@@ -29,7 +28,7 @@ int main(void) {
                         int nx = cur.X + dx[dir];
                         int ny = cur.Y + dy[dir];
                         if(nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
-                        if(vis[nx][ny] == true || board[nx][ny] != '1') continue;
+                        if(board[nx][ny] == '0' || vis[nx][ny] == true) continue;
                         vis[nx][ny] = true;
                         q.push({nx, ny});
                     }
