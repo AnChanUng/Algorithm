@@ -84,7 +84,7 @@ s.empty()
 vector<int> a = {1, 2, 3}
 sort(a.begin(), a.end());
 do {
-    for(int x : v) cout << x << " ";
+    for(int x : a) cout << x << " ";
     cout << "\n";
 } while(next_permutation(a.begin(), a.end()));
 
