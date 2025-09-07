@@ -40,7 +40,7 @@ int compare(pair<int, int> a, pair<int, int> b) {
 sort(a.begin(), a.end(), compare); // 두 번째 기준 정렬, 같으면 첫 번째 기준 정렬
 ```
 
-### 스택/큐
+### 스택/큐/덱
 ```
 #include <stack>
 stack.top()
@@ -56,7 +56,12 @@ q.pop() // 맨 앞 요소 삭제
 q.empty() // 비었는지 확인       
 q.size() // 크기 확인
 
-priority_queue<int> pq // 우선순위 큐 자료구조
+#include <deque>
+pop_front();
+pop_back();
+
+# 우선순위 큐 자료구조
+priority_queue<int> pq 
 priority_queue<int, vector<int>, greater<int>> pq
 pq.top() // 가장 큰 값
 pq.push()
