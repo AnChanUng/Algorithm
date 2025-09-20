@@ -104,6 +104,21 @@ do {
 prev_permutation(v.begin(), v.end()) // 이전 순열
 ```
 
+### 그래프
+```
+# 인접 행렬
+for(int i=0; i<5; i++) {
+    graph[a][b] = 1;
+    graph[b][a] = 1;
+}
+# 인접 리스트
+vector<int> graph[5];
+for(int i=0; i<5; i++) {
+    graph[a].push_back(b);
+    graph[b].push_back(a);
+}
+```
+
 ### 누적합
 ```
 #include <numeric>
