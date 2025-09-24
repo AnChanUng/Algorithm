@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define X first
-#define Y second
 int dist[100001];
 int n, k;
 int main() {
