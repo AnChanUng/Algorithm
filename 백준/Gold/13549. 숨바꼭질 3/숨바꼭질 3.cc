@@ -10,10 +10,8 @@ int main() {
     dist[n] = 0;
     while(!q.empty()) {
         auto cur = q.front(); q.pop();
-        if(cur == k) {
-            break;
-        }
-        int nx = cur * 2;
+        if(cur == k) break;
+        int nx = 2 * cur;
         if(nx <= 100002 && dist[nx] == -1) {
             dist[nx] = dist[cur];
             q.push(nx);
