@@ -1,27 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, m;            // 사다리 수, 뱀의 수
-int x, y;            // 사다리의 정보
-int u, v;            // 뱀의 정보
-int dist[101];       
-int ladder[101];     // 사다리
-int bam[101];        // 뱀
-bool vis[101];       
+int n, m;
+int x, y, u, v;
+int dist[101];
+bool vis[101];
+int sadari[101];
+int bam[101];
 int main() {
     cin >> n >> m;
-    // 사다리 정보
     for(int i=0; i<n; i++) {
-        cin >> x >> y; // x번칸 도착 y번칸 이동
-        ladder[x] = y;
+        cin >> x >> y;
+        sadari[x] = y;
     }
-    // 뱀의 정보
     for(int i=0; i<m; i++) {
-        cin >> u >> v; // u번칸 도착하면 v번칸 이동
-        bam[u] = v;
+        cin >> u >> v;
+        bam[u] = v;    
     }
     queue<int> q;
+    vis[0] = true;
     q.push(1);
-    vis[1] = true;
     dist[1] = 0;
     while(!q.empty()) {
         auto cur = q.front(); q.pop();
@@ -30,9 +27,9 @@ int main() {
             return 0;
         }
         for(int dice=1; dice<=6; dice++) {
-            int nx = cur + dice; 
-            if(nx > 100) continue;
-            if(ladder[nx]) nx = ladder[nx];
+            int nx = cur + dice;
+            if(nx > 101) continue;
+            if(sadari[nx]) nx = sadari[nx];
             if(bam[nx]) nx = bam[nx];
             if(!vis[nx]) {
                 vis[nx] = true;
