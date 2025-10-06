@@ -1,45 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define X first
-#define Y second
+int n;
+char graph[26][26];
+bool vis[26][26];
+vector<int> v;
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
-string board[27];
-int vis[27][27];
-int n;
-int main(void) {
+#define X first
+#define Y second
+int main() {
     cin >> n;
     for(int i=0; i<n; i++) {
-        cin >> board[i];
+        cin >> graph[i];
     }
-    vector<int> maps;
+
     for(int i=0; i<n; i++) {
         for(int j=0; j<n; j++) {
-            int cnt = 0;
-            if(board[i][j] == '1' && vis[i][j] == false) {
-                int cnt = 0;
+            if(graph[i][j] == '1' && !vis[i][j]) {
                 queue<pair<int, int>> q;
                 vis[i][j] = true;
                 q.push({i, j});
+                int cnt = 1;
                 while(!q.empty()) {
                     auto cur = q.front(); q.pop();
-                    cnt++;
                     for(int dir=0; dir<4; dir++) {
                         int nx = cur.X + dx[dir];
                         int ny = cur.Y + dy[dir];
                         if(nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
-                        if(board[nx][ny] == '0' || vis[nx][ny] == true) continue;
-                        vis[nx][ny] = true;
-                        q.push({nx, ny});
+                        if(!vis[nx][ny] && graph[nx][ny] == '1') {
+                            vis[nx][ny] = true;
+                            q.push({nx, ny});
+                            cnt++;
+                        }
                     }
                 }
-                maps.push_back(cnt);
+                v.push_back(cnt);
             }
         }
     }
-    cout << maps.size() << "\n";
-    sort(maps.begin(), maps.end());
-    for(int i=0; i<maps.size(); i++) {
-        cout << maps[i] << "\n";
+    sort(v.begin(), v.end());
+    cout << v.size() << "\n";
+    for(int i=0; i<v.size(); i++) {
+        cout << v[i] << "\n";
     }
 }
