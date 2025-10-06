@@ -1,12 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n, m;
-string str;
+int wCnt = 0, bCnt = 0;
+char arr[101][101];
 bool vis[101][101];
-vector<string> war;
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
-int wCnt = 0, bCnt = 0;
+#define X first
+#define Y second
 
 void bfs(int x, int y) {
     queue<pair<int, int>> q;
@@ -16,17 +17,17 @@ void bfs(int x, int y) {
     while(!q.empty()) {
         auto cur = q.front(); q.pop();
         for(int dir=0; dir<4; dir++) {
-            int nx = cur.first + dx[dir];
-            int ny = cur.second + dy[dir];
+            int nx = cur.X + dx[dir];
+            int ny = cur.Y + dy[dir];
             if(nx < 0 || nx >= m || ny < 0 || ny >= n) continue;
-            if(!vis[nx][ny] && war[nx][ny] == war[cur.first][cur.second]) {
+            if(!vis[nx][ny] && arr[nx][ny] == arr[cur.X][cur.Y]) {
+                cnt++;
                 vis[nx][ny] = true;
                 q.push({nx, ny});
-                cnt++;
             }
         }
     }
-    if(war[x][y] == 'W') {
+    if(arr[x][y] == 'W') {
         wCnt += cnt * cnt;
     } else {
         bCnt += cnt * cnt;
@@ -34,16 +35,13 @@ void bfs(int x, int y) {
 }
 
 int main() {
-    cin >> n >> m; 
-    
+    cin >> n >> m; // 가로, 세로
     for(int i=0; i<m; i++) {
-        cin >> str;
-        war.push_back(str);
+        cin >> arr[i];
     }
-    
     for(int i=0; i<m; i++) {
         for(int j=0; j<n; j++) {
-            if(!vis[i][j]) {
+            if(!vis[i][j] && arr[i][j]) {
                 bfs(i, j);
             }
         }
