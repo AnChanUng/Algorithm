@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
-int dist[100002];
-int cnt[100002];
 int n, k;
-int main(void) {
+int dist[100001];
+int cnt[100001];
+int main() {
     cin >> n >> k;
-    fill(dist, dist+100002, -1);
+    fill(dist, dist+100001, -1);
     queue<int> q;
     q.push(n);
     dist[n] = 0;
@@ -13,8 +13,8 @@ int main(void) {
     while(!q.empty()) {
         auto cur = q.front(); q.pop();
         if(cur == k) break;
-        for(int nx : {cur-1, cur+1, 2*cur}) {
-            if(nx < 0 || nx > 100002) continue;
+        for(int nx : {cur-1, cur+1, cur*2}) {
+            if(nx < 0 || nx > 100001) continue;
             if(dist[nx] == -1) {
                 dist[nx] = dist[cur] + 1;
                 cnt[nx] = cnt[cur];
