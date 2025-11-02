@@ -17,7 +17,7 @@ int main() {
     }
 
     int answer = cur;
-    for(int i=1; i<=n-k+1; i++) {
+    for(int i=1; i<=n-k; i++) {
         cur = cur + broken[i+k] - broken[i];
         answer = min(answer, cur);
     }
