@@ -34,11 +34,11 @@ sort(a.begin(), a.end(), greater<int>()) // 내림차순
 iota(a.begin(), a.end(), 0); // 0, 1, 2, 3, 4, ... n-1 까지 생성
 
 bool compare(pair<int, int> a, pair<int, int> b) {
-    if(a.second == b.second)      // Y(두 번째) 같으면
-        return a.first < b.first; // X(첫 번째) 오름차순
-    return a.second < b.second;   // Y(두 번째) 오름차순                   
+    if(a.second == b.second)      
+        return a.first < b.first; 
+    return a.second < b.second;                  
 }
-sort(a.begin(), a.end(), compare); // 두 번째 기준 정렬, 같으면 첫 번째 기준 정렬
+sort(a.begin(), a.end(), compare); // 두 번째를 기준으로 오름차순 정렬하되, 두 번째 값이 같을 경우 첫 번째를 기준으로 오름차순 정렬
 ```
 
 ### 스택/큐/덱
