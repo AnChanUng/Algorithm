@@ -33,9 +33,10 @@ sort(a.begin(), a.end()) // 오름차순
 sort(a.begin(), a.end(), greater<int>()) // 내림차순
 iota(a.begin(), a.end(), 0); // 0, 1, 2, 3, 4, ... n-1 까지 생성
 
-int compare(pair<int, int> a, pair<int, int> b) {
-    if(a.Y == b.Y) return a.X < b.X;
-    return a.Y < b.Y;
+bool compare(pair<int, int> a, pair<int, int> b) {
+    if(a.second == b.second)      // Y(두 번째) 같으면
+        return a.first < b.first; // X(첫 번째) 오름차순
+    return a.second < b.second;   // Y(두 번째) 오름차순                   
 }
 sort(a.begin(), a.end(), compare); // 두 번째 기준 정렬, 같으면 첫 번째 기준 정렬
 ```
