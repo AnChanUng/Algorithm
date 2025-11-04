@@ -31,7 +31,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 #include <bits/stdc++.h>
 using namespace std;
-int n, k, cnt;
+int n, k;
+int cnt;
 
 void dfs(vector<int> a, int index, int sum) {
 	if(sum > k) {
@@ -44,7 +45,7 @@ void dfs(vector<int> a, int index, int sum) {
 		dfs(a, i, sum+a[i]);
 	}
 }
-
+ 
 int main(int argc, char** argv)
 {
 	int test_case;
@@ -55,14 +56,13 @@ int main(int argc, char** argv)
 	for(test_case = 1; test_case <= T; ++test_case)
 	{
 		cin >> n >> k;
-		cnt = 0;
-		vector<int> a(n, 0);
-
+		vector<int> v(n, 0);
 		for(int i=0; i<n; i++) {
-			cin >> a[i];
+			cin >> v[i];
 		}
+		cnt = 0;
 
-		dfs(a, -1, 0);
+		dfs(v, -1, 0);
 
 		cout << "#" << test_case << " " << cnt << "\n";
 	}
