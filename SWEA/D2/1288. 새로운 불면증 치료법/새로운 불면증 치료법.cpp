@@ -41,20 +41,21 @@ int main(int argc, char** argv)
 	for(test_case = 1; test_case <= T; ++test_case)
 	{
 		cin >> n;
-		tmp = n;
+		int base = stoi(n);
 		set<int> s;
-		int cnt = 0;
-		while(s.size() <= 9) {
-			cnt ++;
-			int num = stoi(n) * cnt;
-			tmp = to_string(num);
+		int cnt = 0, num = 0;
+
+		while(s.size() < 10) {
+			cnt++;
+			num = base * cnt;
+			string tmp = to_string(num);
 
 			for(int i=0; i<tmp.size(); i++) {
 				s.insert(tmp[i]);
 			}
 		}
 
-		cout << "#" << test_case << " " << tmp << "\n";
+		cout << "#" << test_case << " " << num << "\n";
 	}
 	return 0;
 }
