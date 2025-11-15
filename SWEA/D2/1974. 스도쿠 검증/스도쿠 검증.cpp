@@ -32,55 +32,75 @@
 #include <bits/stdc++.h>
 using namespace std;
 int t;
+int graph[10][10];
+
+/*
+	문제
+
+	접근 방식
+	- 
+*/
 int main() {
     cin >> t;
-    int graph[10][10];
     for(int test_case=1; test_case<=t; test_case++) {
-        int answer = 1;
-        for(int i=0; i<9; i++) {
-            for(int j=0; j<9; j++) {
-                cin >> graph[i][j];
-            }
-        }
-        // 가로
-        for(int i=0; i<9; i++) {
-            int garoSum = 0;
-            for(int j=0; j<9; j++) {
-                garoSum += graph[i][j];
-            }
-            if(garoSum != 45) { 
-                answer = 0;
-                break;
-            }
-        }
+		int answer = 1;
+		
+		for(int i=0; i<9; i++) {
+			for(int j=0; j<9; j++) {
+				cin >> graph[i][j];				
+			}
+		}
+		
+		// 가로 체크
+		bool colFlag = true;
+		for(int i=0; i<9; i++) {
+			int total = 0;
+			for(int j=0; j<9; j++) {
+				total += graph[i][j];
+			}
+			if(total != 45) {
+				colFlag = false;
+				//cout << "colFlag: " << colFlag << "\n";
+				break;
+			}
+		}
 
-        // 세로
-        for(int i=0; i<9; i++) {
-            int seroSum = 0;
-            for(int j=0; j<9; j++) {
-                seroSum += graph[j][i];
-            }
-            if(seroSum != 45) { 
-                answer = 0;
-                break;
-            }
-        }
-        // 3*3
-        for(int i=0; i<9; i+=3) {
-            for(int j=0; j<9; j+=3) {
-                int total = 0;
-                for(int a=0; a<3; a++) {
-                    for(int b=0; b<3; b++) {
-                        total += graph[i+a][j+b];
-                        //cout << "i+a: " << i+a << " j+b: " << j+b << "\n";
-                    }    
-                }
-                if(total != 45) {
-                    answer = 0;
-                    break;
-                }
-            }
-        }
-        cout << "#" << test_case << " " << answer << "\n";
-    }
+		// 세로 체크
+		bool rowFlag = true;
+		for(int i=0; i<9; i++) {
+			int total = 0;
+			for(int j=0; j<9; j++) {
+				total += graph[j][i];
+			}
+			if(total != 45) {
+				rowFlag = false;
+				//cout << "rowFlag: " << rowFlag << "\n";
+				break;
+			}
+		}
+
+		// 3*3 체크
+		bool flag = true;
+		for(int i=0; i<9; i+=3) {
+			for(int j=0; j<9; j+=3) {
+				int total = 0;
+				for(int a=0; a<3; a++) {
+					for(int b=0; b<3; b++) {
+						total += graph[i+a][j+b];
+					}
+				}
+				if(total != 45) {
+					flag = false;
+					//cout << i << " " << j << " flag: " << flag << "\n";
+					break;
+				}
+			}
+		}
+		
+		if(!colFlag || !rowFlag || !flag) {
+			answer = 0;
+		}
+
+		cout << "#" << test_case << " " << answer << "\n";
+    }    
 }
