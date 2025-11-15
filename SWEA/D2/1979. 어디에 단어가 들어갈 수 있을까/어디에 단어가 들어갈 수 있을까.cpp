@@ -31,55 +31,76 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 #include <bits/stdc++.h>
 using namespace std;
-int t, n, s;
+int n, k;
+int graph[16][16];
+int answer;
 
-int main() {
-    cin >> t;
-    for(int test_case=1; test_case<=t; test_case++) {
-        cin >> n >> s; // 가로, 세로
-        int graph[16][16];
+int main(int argc, char** argv)
+{
+	int test_case;
+	int T;
 
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
-                cin >> graph[i][j];
-            }
-        }
-        int total = 0; // 가로 개수 카운트
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
-                int garoCnt = 0;
-                if(graph[i][j] == 1) {
-                    for(int k=j; k<n; k++) {
-                        if(graph[i][k] == 1) {
-                            garoCnt++;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-                if(garoCnt == s) { 
-                    if(j == 0 || graph[i][j-1] == 0) total++; 
-                }
-            }
-        }
-        //세로 개수 카운트
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
-                int seroCnt = 0;
-                if(graph[j][i] == 1) {
-                    for(int k=j; k<n; k++) {
-                        if(graph[k][i] == 1) {
-                            seroCnt++;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-                if(seroCnt == s) { 
-                    if(j == 0 || graph[j-1][i] == 0) total++;
-                }
-            }
-        }
-        cout << "#" << test_case << " " << total << "\n";
-    }    
+	cin>>T;
+	/*
+		모든 칸에서 1이 연속되는 부분의 길이를 체크해서 연속되는 부분과
+		k가 같으면 cnt++;
+		
+		문제
+		1.1 t 입력 받음
+		1.2 n, k 입력 받음
+		1.3 n줄에 2차원 정보 입력받음
+		2.  흰색 부분이 k개면 cnt++
+		3.  cnt++ 출력
+
+		접근 방식
+		- 모든 경우의 수 탐색, 연속해서 1인 부분 k면 cnt++
+	*/
+    for(test_case = 1; test_case <= T; ++test_case)
+	{
+		cin >> n >> k;
+		answer = 0;
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				cin >> graph[i][j];
+			}
+		}
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n-k+1; j++) {
+				int colCnt = 0;
+				if(j == 0 && graph[i][j] == 1 && graph[i][j+k] == 0 || j > 0 && graph[i][j] == 1 && graph[i][j-1] == 0 && graph[i][j+k] == 0) {
+					for(int l=0; l<n; l++) {
+						if(graph[i][j+l] == 1) {
+							colCnt++;
+						} else {
+							break;
+						}
+					}
+				}
+				if(colCnt == k) {
+					answer++;
+					//cout << "colCnt: " << i << " " << j << " answer: " << answer << "\n";
+				}
+			}
+		}
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n-k+1; j++) {
+				int rowCnt = 0;
+				if(j== 0 && graph[j][i] == 1 && graph[j+k][i] == 0 || j > 0 && graph[j][i] == 1 && graph[j+k][i] == 0 && graph[j-1][i] == 0) {
+					for(int l=0; l<n; l++) {
+						if(graph[j+l][i] == 1) {
+							rowCnt++;
+						} else {
+							break;
+						}
+					}
+				}
+				if(rowCnt == k) {
+					answer++;
+					//cout << "rowCnt: " << i << " " << j << " answer: " << answer << "\n";
+				}
+			}
+		}
+		cout << "#" << test_case << " " << answer << "\n";
+	} 
+	return 0;
 }
