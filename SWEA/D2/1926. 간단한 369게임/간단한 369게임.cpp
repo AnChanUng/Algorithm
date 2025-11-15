@@ -29,27 +29,35 @@
 // cout << var;                         // 문자열 1개 출력하는 예제
 // cout << AB;                          // long long 변수 1개 출력하는 예제
 /////////////////////////////////////////////////////////////////////////////////////////////
-
 #include <bits/stdc++.h>
 using namespace std;
-int n;
-int main() {
-    cin >> n;
-    for(int i=1; i<=n; i++) {
-        int temp = i;
-        bool flag = false;
-        
-        while(temp > 0) {
-            int res = temp % 10;
-            if(res == 3 || res == 6 || res == 9) {
-                cout << "-";
-                flag = true;
-            }
-            temp /= 10;
+
+int main(int argc, char** argv)
+{
+	/*
+		문제
+		1.  n 입력 받기
+		2.  1~n의 숫자중에서 369면 갯수만큼 - 출력
+		2.1 아니면 숫자 출력
+
+		접근 방식
+		- 모든 경우 탐색
+	*/
+	int n;
+	cin >> n;
+	for(int num=1; num<=n; num++) {
+		bool flag = false;
+		for(int i=0; i<to_string(num).size(); i++) {
+			string str = to_string(num);
+            if(str[i] == '3' || str[i] == '6' || str[i] == '9') {
+				flag = true;
+				cout << "-";
+			}
         }
         if(!flag) {
-            cout << i;
-        }
+			cout << num;
+		}
         cout << " ";
-    }
+	}
+	return 0;
 }
