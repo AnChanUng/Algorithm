@@ -31,28 +31,28 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 #include <bits/stdc++.h>
 using namespace std;
-int main(int argc, char** argv)
-{
-	int test_case;
-	int T;
+int t;
+string str;
+/*
+	문제
 
-	cin>>T;
-
-	for(test_case = 1; test_case <= T; ++test_case)
-	{
-		string st;
-		cin >> st;
+	접근 방식
+	- 
+*/
+int main() {
+    cin >> t;
+    for(int test_case=1; test_case<=t; test_case++) {
+		cin >> str;
 		int answer = 0;
-		for(int i=1; i<=10; i++) {
-			string a = st.substr(0, i);
-			string b = st.substr(i, i);
-			
-			if(a == b) {
+		for(int i=1; i<=str.size(); i++) {
+			string tmp1 = str.substr(0, i);
+			string tmp2 = str.substr(i, i);
+			//cout << tmp1 << " " << tmp2 << "\n";
+			if(tmp1 == tmp2) {
 				answer = i;
 				break;
-			}
-		}
+			}		
+		}		
 		cout << "#" << test_case << " " << answer << "\n";
-	}
-	return 0;
+    }    
 }
