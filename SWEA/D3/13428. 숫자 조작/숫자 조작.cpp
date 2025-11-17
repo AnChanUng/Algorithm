@@ -50,13 +50,11 @@ int main(int argc, char** argv)
 				string tmp = strNum;
 				swap(tmp[i], tmp[j]);
 				if(tmp[0] == '0') {
-					swap(tmp[j], tmp[i]);
+					continue;
 				}
-				//cout << "tmp: " << tmp << "\n";
 				int ttmp = stoi(tmp);
 				maxNum = max(maxNum, ttmp);
 				minNum = min(minNum, ttmp);
-				//cout << "maxNum: " << maxNum << " minNum: " << minNum << "\n";
 			}
 		}
 		cout << "#" << test_case << " " << minNum << " " << maxNum << "\n";
