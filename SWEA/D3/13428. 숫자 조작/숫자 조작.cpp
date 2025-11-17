@@ -43,18 +43,23 @@ int main(int argc, char** argv)
 	{
 		string strNum;
 		cin >> strNum;
+
 		int maxNum = stoi(strNum);
 		int minNum = stoi(strNum);
+
 		for(int i=0; i<strNum.size(); i++) {
 			for(int j=i+1; j<strNum.size(); j++) {
-				string tmp = strNum;
-				swap(tmp[i], tmp[j]);
-				if(tmp[0] == '0') {
-					continue;
+				swap(strNum[i], strNum[j]);
+				
+				if(strNum[0] == '0') { 
+					swap(strNum[i], strNum[j]);
+					continue; 
 				}
-				int ttmp = stoi(tmp);
-				maxNum = max(maxNum, ttmp);
-				minNum = min(minNum, ttmp);
+				int tmp = stoi(strNum);
+				maxNum = max(maxNum, tmp);
+				minNum = min(minNum, tmp);
+
+				swap(strNum[i], strNum[j]);
 			}
 		}
 		cout << "#" << test_case << " " << minNum << " " << maxNum << "\n";
