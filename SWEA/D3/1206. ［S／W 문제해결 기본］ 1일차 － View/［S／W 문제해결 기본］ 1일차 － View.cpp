@@ -29,33 +29,45 @@
 // cout << var;                         // 문자열 1개 출력하는 예제
 // cout << AB;                          // long long 변수 1개 출력하는 예제
 /////////////////////////////////////////////////////////////////////////////////////////////
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
+#include <vector>
 using namespace std;
-int n, h;
-int main() {
-    for(int test_case=1; test_case<=10; test_case++) {
-        cin >> n;
-        vector<int> v;
-        for(int i=0; i<n; i++) {
-            cin >> h; // 건물의 높이
-            v.push_back(h);
-        }
-        int answer = 0;
-        for(int i=2; i<v.size(); i++) {
-            // 본인의 위치에서 왼쪽두칸과 오른쪽 두칸이 본인보다 작으면 그 차이의 -2만큼 저장
-            // 본인 기준 왼쪽에서 가장 큰거
-            int leftHeight = *max_element(v.begin()+i-2, v.begin()+i);
-            //cout << "i: " << i << " lh:" << leftHeight << "\n"; 
-            // 본인 기준 오른쪽에서 가장 큰거
-            int rightHeight = *max_element(v.begin()+i+1, v.begin()+i+3);
-            // 그 두개중에 더 큰거
-            int maxHeight = max(leftHeight, rightHeight); 
-            // 본인의 크기 > 최대높이
-            if(maxHeight < v[i]) {
-                // answer += 본인의크기-최대의높이
-                answer += v[i] - maxHeight; 
-            }
-        }
-        cout << "#" << test_case << " " << answer << "\n";
-    }
+
+/*
+	
+
+	문제
+	
+	
+	접근 방식
+	
+*/
+int main()
+{
+	int T;
+	//cin >> T;
+	for (int test_case = 1; test_case <= 10; ++test_case)
+	{
+		int n, nn;
+		cin >> n;
+		vector<int> v;
+		for (int i = 0; i < n; i++) {
+			cin >> nn;
+			v.push_back(nn);
+		}
+		int total = 0;
+		for (int i = 2; i < v.size() - 2; i++) {
+			int maxLeft = *max_element(v.begin()+i-2, v.begin()+i);
+			int maxRight = *max_element(v.begin()+i+1, v.begin()+i+3);
+			int maxTotal = max(maxLeft, maxRight);
+			if (v[i] - maxTotal > 0) {
+				total += v[i] - maxTotal;
+			} else {
+				total += 0;
+			}
+		}
+		cout << "#" << test_case << " " << total << "\n";
+	}
+	return 0;
 }
