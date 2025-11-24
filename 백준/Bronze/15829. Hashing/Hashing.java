@@ -17,11 +17,13 @@ public class Main {
 
         int l = Integer.parseInt(br.readLine());
         String str = br.readLine();
-
-        int total = 0;
+        long m = 1234567891;
+        long pow = 1;
+        long total = 0;
         for(int i=0; i<l; i++) {
-            int word = (int)str.charAt(i) - 97;
-            total += (int)Math.pow(31, i) * (word+1);
+            int word = str.charAt(i) - 'a' + 1;
+            total = (total + word * pow) % m;
+            pow = (pow * 31) % m;
         }
         System.out.println(total);
     }
