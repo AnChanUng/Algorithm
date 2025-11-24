@@ -11,7 +11,7 @@ public class Main {
         if(x == 2) {
             return true;
         }
-        for(int i=2; i<=x-1; i++) {
+        for(int i=2; i<=(int)Math.sqrt(x); i++) {
             if(x % i == 0) {
                 return false;
             }
