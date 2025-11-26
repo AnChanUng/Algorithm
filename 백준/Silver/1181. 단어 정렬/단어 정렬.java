@@ -19,13 +19,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        String arr[] = new String[n];
-
         int idx = 0;
+        String arr[] = new String[n];
         for(int i=0; i<n; i++) {
             String str = sc.next();
             boolean flag = false;
-
             for(int j=0; j<idx; j++) {
                 if(arr[j].equals(str)) {
                     flag = true;
@@ -33,15 +31,16 @@ public class Main {
                 }
             }
             if(!flag) {
-                arr[idx++] = str;
+                arr[idx] = str;
+                idx++;
             }
         }
-        // 길이가 짧은 것부터 오름차순 정렬, 길이가 같으면 사전 순 정렬
+
         Arrays.sort(arr, 0, idx, (a, b) -> {
-           if(a.length() != b.length()) {
-               return a.length() - b.length(); // 길이 비교
-           }
-           return a.compareTo(b); // 사전순 비교
+            if(a.length() != b.length()) {
+                return a.length() - b.length();
+            }
+            return a.compareTo(b);
         });
 
         for(int i=0; i<idx; i++) {
