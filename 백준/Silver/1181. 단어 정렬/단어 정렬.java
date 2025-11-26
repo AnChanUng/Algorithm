@@ -1,37 +1,51 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
 
-class Main {
+/*
+    길이가 짧은 것부터, 같으면 사전 순으로 오름차순 정렬. 중복된 단어는 제거
+
+    문제
+    1.1 n 입력 받기
+    1.2 n개만큼 문자 입력 받기. 입력 받은 문자 배열에 저장, 중복 되면 저장x
+    2   길이가 짧은 것부터 길이가 같으면 사전 순 정렬
+    3   하나씩 출력
+
+    접근 방식
+    - 1차원 배열
+ */
+public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int num = Integer.parseInt(br.readLine());
+        Scanner sc = new Scanner(System.in);
 
-        String[] arr = new String[num];
+        int n = sc.nextInt();
+        String arr[] = new String[n];
 
-        for(int i=0; i<num; i++) {
-            arr[i] = br.readLine();
-        }
+        int idx = 0;
+        for(int i=0; i<n; i++) {
+            String str = sc.next();
+            boolean flag = false;
 
-        Arrays.sort(arr, new Comparator<String>() {
-            public int compare(String s1, String s2) {
-                if(s1.length() == s2.length()) {
-                    return s1.compareTo(s2);
-                } else {
-                    return s1.length() - s2.length();
+            for(int j=0; j<idx; j++) {
+                if(arr[j].equals(str)) {
+                    flag = true;
+                    break;
                 }
             }
-        });
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(arr[0]).append('\n');
-
-        for(int i=1; i<num; i++) {
-            if(!arr[i].equals(arr[i-1])) {
-                sb.append(arr[i]).append('\n');
+            if(!flag) {
+                arr[idx++] = str;
             }
         }
-        System.out.println(sb);
+        // 길이가 짧은 것부터 오름차순 정렬, 길이가 같으면 사전 순 정렬
+        Arrays.sort(arr, 0, idx, (a, b) -> {
+           if(a.length() != b.length()) {
+               return a.length() - b.length(); // 길이 비교
+           }
+           return a.compareTo(b); // 사전순 비교
+        });
+
+        for(int i=0; i<idx; i++) {
+            System.out.println(arr[i]);
+        }
     }
 }
