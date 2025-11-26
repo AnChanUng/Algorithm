@@ -1,35 +1,43 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 
-class Main {  
+/*
+    몸무게, 키가 큰 순서대로 내림차순 정렬
+    몸무게 > 키, 키 < 몸무게일 경우 등수 동점
+
+    문제
+    1.1 전체 사람 수(n) 입력 받기
+    1.2 n개의 줄에 몸무게(x), 키(y) 입력 받기
+    2   몸무게, 키 순 내림차순 정렬
+    3   입력받은대로 등수 출력
+*/
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         int n = Integer.parseInt(br.readLine());
 
-        int[][] arr = new int[n][2];
+        int arr[][] = new int[n][2];
         for(int i=0; i<n; i++) {
-            String[] inputs = br.readLine().split(" ");
-            arr[i][0] = Integer.parseInt(inputs[0]);
-            arr[i][1] = Integer.parseInt(inputs[1]);
+            String parts[] = br.readLine().split(" ");
+            arr[i][0] = Integer.parseInt(parts[0]);
+            arr[i][1] = Integer.parseInt(parts[1]);
         }
 
-        int[] ranks = new int[n];
-
+        int rank[] = new int[n];
+        Arrays.fill(rank, 1);
         for(int i=0; i<n; i++) {
-            int rank = 1;
             for(int j=0; j<n; j++) {
-                if(i != j) {
-                    if(arr[i][0] < arr[j][0] && arr[i][1] < arr[j][1]) {
-                        rank++;
-                    }
-                }    
+                if(i == j) continue;
+                if(arr[j][0] > arr[i][0] && arr[j][1] > arr[i][1]) {
+                    rank[i]++;
+                }
             }
-            ranks[i] = rank;
         }
-
-        for(int i=0; i<n; i++) {
-            System.out.print(ranks[i] + " ");
+        for(int i=0; i<rank.length; i++) {
+            System.out.print(rank[i] + " ");
         }
     }
 }
