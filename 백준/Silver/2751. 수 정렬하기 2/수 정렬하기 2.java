@@ -1,25 +1,23 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 
-class Main {  
+public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        ArrayList<Integer> list = new ArrayList<>();
-        for(int i=0; i<n; i++) {
-            int num = Integer.parseInt(br.readLine());
-            list.add(num);
-        }
+         int n = Integer.parseInt(br.readLine());
+         int arr[] = new int[n];
+         for(int i=0; i<n; i++) {
+             int a = Integer.parseInt(br.readLine());
+             arr[i] = a;
+         }
 
-        Collections.sort(list);
+         Arrays.sort(arr);
 
-        StringBuilder sb = new StringBuilder();
-        
-        for(int value : list) {
-            sb.append(value).append('\n');
-        }
-        System.out.println(sb);
+         for(int i=0; i<n; i++) {
+             System.out.println(arr[i]);
+         }
     }
 }
