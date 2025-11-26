@@ -1,6 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
-
+import java.io.InputStreamReader;
 /*
     종말의 수란 어떤 수에 6이 적어도 3개 이상 연속으로 들어가는 수
     ex) 666 -> 1666 -> 2666
@@ -15,35 +15,19 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = sc.nextInt();
+        int n = Integer.parseInt(br.readLine());
 
-        // 6이 연속 3번 들어가는 수를 찾고 cnt++;
-        int ans = 0;
-        int arr[] = new int[10001];
-        int num = 1;
-        while(ans < 10000) {
-            int cnt = 0;
-            String strNum = String.valueOf(num);
-            boolean flag = false;
-            for(int i=0; i<strNum.length(); i++) {
-                if(strNum.charAt(i) == '6') {
-                    cnt++;
-                } else {
-                    cnt = 0;
-                }
+        int num = 666;
+        int cnt = 1;
 
-                if(cnt >= 3) {
-                    ans++;
-                    arr[ans] = num;
-                    flag = true;
-                    break;
-                }
-            }
+        while(cnt != n) {
             num++;
+            if(String.valueOf(num).contains("666")) {
+                cnt++;
+            }
         }
-
-        System.out.print(arr[n]);
+        System.out.println(num);
     }
 }
