@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Scanner;
-
 /*
     문제
     1. n 입력 받기
@@ -22,11 +21,9 @@ public class Main {
             q.offer(i);
         }
 
-        while(q.size() != 1) {
+        while(q.size() > 1) {
             q.poll();
-            int qq = q.peek();
-            q.poll();
-            q.offer(qq);
+            q.offer(q.poll());
         }
 
         System.out.print(q.peek());
