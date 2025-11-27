@@ -1,37 +1,42 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
 
-class Main {
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        int t = Integer.parseInt(br.readLine());
-        
-        for(int i=0; i<t; i++) {
+        int n = Integer.parseInt(br.readLine());
+
+        for(int a=0; a<n; a++) {
             String str = br.readLine();
-            Stack<Character> stack = new Stack<>();
-            for(int j=0; j<str.length(); j++) {
-                char a = str.charAt(j);
-                
-                if(a == '(') {
-                    stack.push(a);
-                } else if (a == ')') {
-                    if(!stack.isEmpty() && stack.peek() == '(') {
-                        stack.pop();
-                    } else {
-                        stack.push(a);
+            Stack<Character> st = new Stack<>();
+            boolean flag = true;
+            for(int i=0; i<str.length(); i++) {
+                char ch = str.charAt(i);
+                if(ch == '(') {
+                    st.push(ch);
+                } else if (!st.empty() && ch == ')') {
+                    if (st.peek() == '(') {
+                        st.pop();
+                    } else if (!st.empty() && st.peek() == ')') {
+                        flag = false;
+                        break;
                     }
+                } else {
+                    flag = false;
+                    break;
                 }
             }
-
-            if(!stack.isEmpty()) {
+            if(!flag) {
                 System.out.println("NO");
-            } else {
-                System.out.println("YES");
+                continue;
             }
-
-            stack.clear();
+            if(st.empty()) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
         }
     }
 }
