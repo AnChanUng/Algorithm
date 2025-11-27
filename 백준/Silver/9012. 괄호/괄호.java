@@ -12,27 +12,23 @@ public class Main {
             String str = br.readLine();
             Stack<Character> st = new Stack<>();
             boolean flag = true;
+
             for(int i=0; i<str.length(); i++) {
                 char ch = str.charAt(i);
+
                 if(ch == '(') {
                     st.push(ch);
-                } else if (!st.empty() && ch == ')') {
-                    if (st.peek() == '(') {
+                } else if (ch == ')') {
+                    if (!st.isEmpty() && st.peek() == '(') {
                         st.pop();
-                    } else if (!st.empty() && st.peek() == ')') {
+                    } else {
                         flag = false;
                         break;
                     }
-                } else {
-                    flag = false;
-                    break;
                 }
             }
-            if(!flag) {
-                System.out.println("NO");
-                continue;
-            }
-            if(st.empty()) {
+
+            if(flag && st.empty()) {
                 System.out.println("YES");
             } else {
                 System.out.println("NO");
