@@ -1,53 +1,54 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-class Main {  
+public class Main {
+    static char[][] board;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        String[] inputs = br.readLine().split(" ");
 
-        String[][] arr = new String[n][m];
-       
-        for(int i=0; i<n; i++) {
-            String inputs = br.readLine();
-            arr[i] = inputs.split("");
+        int n = Integer.parseInt(inputs[0]);
+        int m = Integer.parseInt(inputs[1]);
+
+        board = new char[n][m];
+        for (int i = 0; i < n; i++) {
+            String line = br.readLine();
+            for (int j = 0; j < m; j++) {
+                board[i][j] = line.charAt(j);
+            }
         }
 
-        String[][] arr1 = new String[8][8]; // W로 시작
-        String[][] arr2 = new String[8][8]; // B로 시작
-        
+        int answer = Integer.MAX_VALUE;
+
+        for (int i = 0; i <= n - 8; i++) {
+            for (int j = 0; j <= m - 8; j++) {
+                answer = Math.min(answer, countRepaint(i, j));
+            }
+        }
+
+        System.out.println(answer);
+    }
+
+    static int countRepaint(int x, int y) {
+        int firstWhite = 0;
+        int firstBlack = 0;
+
         for(int i=0; i<8; i++) {
             for(int j=0; j<8; j++) {
-                if((i+j) % 2 == 0) {
-                    arr1[i][j] = "W";
-                    arr2[i][j] = "B"; 
+                char current = board[x+i][y+j];
+
+                if ((i + j) % 2 == 0) {
+                    if(current != 'W') firstWhite++;
+                    if(current != 'B') firstBlack++;
                 } else {
-                    arr1[i][j] = "B";
-                    arr2[i][j] = "W";
+                    if(current != 'B') firstWhite++;
+                    if(current != 'W') firstBlack++;
                 }
             }
         }
-        int res = Integer.MAX_VALUE;
-        for(int a=0; a<n-7; a++) { 
-            for(int b=0; b<m-7; b++) { 
-                int count1 = 0;
-                int count2 = 0;
-                for(int i=a; i<a+8; i++) { 
-                    for(int j=b; j<b+8; j++) {
-                        if(!arr[i][j].equals(arr1[i-a][j-b])) {
-                            count1++;
-                        }
-                        if(!arr[i][j].equals(arr2[i-a][j-b])) {
-                            count2++;
-                        }
-                    }
-                }
-                res = Math.min(res, Math.min(count1, count2));
-            }
-        }
-        System.out.println(res);
+
+        return Math.min(firstWhite, firstBlack);
     }
 }
