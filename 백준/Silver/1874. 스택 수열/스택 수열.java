@@ -1,38 +1,37 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.Stack;
 
-class Main {
+public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
-        
-        int n = Integer.parseInt(br.readLine());
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) {
+            arr[i] = sc.nextInt();
+        }
 
         Stack<Integer> stack = new Stack<>();
-
-        int start = 0;
-        
-        while(n-- > 0) {
-
-            int value = Integer.parseInt(br.readLine());
-            
-            if(value > start) {
-                for(int i=start+1; i<=value; i++) {
-                    stack.push(i);
-                    sb.append('+').append('\n');
-                }
-                start = value;
+        int idx=0;
+        int i=1;
+        while(idx < n) {
+            if(!stack.isEmpty() && arr[idx] == stack.peek()) {
+                stack.pop();
+                sb.append("-").append("\n");
+                idx++;
+            } else {
+                stack.push(i);
+                sb.append("+").append("\n");
+                i++;
             }
-            else if(stack.peek() != value) {
+
+            if(i > n*10) {
                 System.out.println("NO");
                 return;
             }
-            stack.pop();
-            sb.append('-').append('\n');
         }
-
         System.out.println(sb);
-        
     }
 }
