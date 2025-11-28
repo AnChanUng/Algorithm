@@ -1,37 +1,31 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-class Main {
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        
-        int n = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
+        String[] inputs = br.readLine().split(" ");
+        int n = Integer.parseInt(inputs[0]);
+        int k = Integer.parseInt(inputs[1]);
 
-        Queue<Integer> q = new LinkedList<>();
-
+        ArrayList<Integer> arr = new ArrayList<>();
         for(int i=1; i<=n; i++) {
-            q.offer(i);
+            arr.add(i);
         }
 
+        StringBuilder sb = new StringBuilder();
         sb.append("<");
-        
-        while(!q.isEmpty()) {
-            for(int i=0; i<k-1; i++) {
-                q.offer(q.poll());
-            }
-            sb.append(q.poll());
 
-            if(!q.isEmpty()) {
-                sb.append(", ");
-            }
+        int idx = 0;
+        while(!arr.isEmpty()) {
+            idx = (idx + k - 1) % arr.size();
+            sb.append(arr.remove(idx));
+
+            if(!arr.isEmpty()) sb.append(", ");
         }
-
         sb.append(">");
-
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 }
