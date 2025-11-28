@@ -1,36 +1,33 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-class Main {
-    public static boolean isPrime(int num) {
-        if(num == 0 || num == 1) {
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inputs = br.readLine().split(" ");
+
+        int m = Integer.parseInt(inputs[0]);
+        int n = Integer.parseInt(inputs[1]);
+
+        StringBuilder sb = new StringBuilder();
+        for(int num=m; num<=n; num++) {
+            if(isPrime(num)) {
+                sb.append(num).append("\n");
+            }
+        }
+        System.out.print(sb);
+    }
+
+    static boolean isPrime(int x) {
+        if(x < 2) {
             return false;
-        } 
-        
-        if(num == 2) {
-            return true;
-        } 
-
-        for(int i=2; i<=(int)Math.sqrt(num); i++) {
-            if(num % i == 0) {
+        }
+        for(int i=2; i<=Math.sqrt(x); i++) {
+            if(x % i == 0) {
                 return false;
             }
         }
         return true;
-    }
-    
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        int m = Integer.parseInt(st.nextToken());
-        int n = Integer.parseInt(st.nextToken());
-
-        for(int i=m; i<=n; i++) {
-            if (isPrime(i)) {
-                System.out.println(i);
-            } 
-        }
     }
 }
