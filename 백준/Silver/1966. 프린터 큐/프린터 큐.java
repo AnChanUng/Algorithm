@@ -1,46 +1,50 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
-import java.lang.*;
-import java.io.*;
-
-class Main {
+/*
+    1.1 test_case 입력 받기
+    1.2 n, m 입력 받기
+    1.3 n개 만큼 중요도 입력 받기
+    2.  큐에서 m번째가 나올 때 까지
+    2.1 큐에서 중요도가 제일 높은게 맨 앞에 있으면 출력
+    2.2 아닐 경우 맨 뒤로 보냄
+ */
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
 
-        for(int i=0; i<t; i++) {
+        int test_case = Integer.parseInt(br.readLine());
+        for(int i=0; i<test_case; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int n = Integer.parseInt(st.nextToken());
             int m = Integer.parseInt(st.nextToken());
 
-            StringTokenizer st2 = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine());
             Queue<int[]> q = new LinkedList<>();
-            
+            PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
             for(int j=0; j<n; j++) {
-                int level = Integer.parseInt(st2.nextToken());
-                q.offer(new int[]{j, level});
+                int priority = Integer.parseInt(st.nextToken());
+                q.offer(new int[] {j, priority});
+                pq.offer(priority);
             }
 
-            int prior = 0;
+            int cnt = 0;
+            while(true) {
+                int[] cur = q.poll();
+                int idx = cur[0];
+                int val = cur[1];
 
-            while(!q.isEmpty()) {
-                int[] current = q.poll();
-                boolean isPrint = true;
-
-                for(int[] a : q) {
-                    if(current[1] < a[1]) {
-                        isPrint = false;
+                if(val == pq.peek()) {
+                    pq.poll();
+                    cnt++;
+                    if(idx == m) {
+                        System.out.println(cnt);
                         break;
                     }
-                }
-
-                if(isPrint) {
-                    prior++;
-                    if(current[0] == m) {
-                        System.out.println(prior);
-                        break;
-                    } 
                 } else {
-                    q.offer(current);
+                    q.offer(cur);
                 }
             }
         }
