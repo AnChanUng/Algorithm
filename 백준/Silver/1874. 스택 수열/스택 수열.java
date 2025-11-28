@@ -22,14 +22,13 @@ public class Main {
                 sb.append("-").append("\n");
                 idx++;
             } else {
+                if (i > n) {
+                    System.out.println("NO");
+                    return;
+                }
                 stack.push(i);
                 sb.append("+").append("\n");
                 i++;
-            }
-
-            if(i > n*10) {
-                System.out.println("NO");
-                return;
             }
         }
         System.out.println(sb);
