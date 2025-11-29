@@ -1,31 +1,45 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
 
-class Main {
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken()); // 포켓몬의 개수
-        int m = Integer.parseInt(st.nextToken()); // 문제의 개수
+        String[] inputs = br.readLine().split(" ");
 
-        HashMap<String, Integer> map = new HashMap<>();
-        HashMap<Integer, String> reverseMap = new HashMap<>();
-        
+        int n = Integer.parseInt(inputs[0]); // 포켓몬 개수
+        int m = Integer.parseInt(inputs[1]); // 문제의 개수
+
+        HashMap<Integer, String> map1 = new HashMap<>();
+        HashMap<String, Integer> map2 = new HashMap<>();
         for(int i=1; i<=n; i++) {
-            String poketmon = br.readLine();
-            map.put(poketmon, i);
-            reverseMap.put(i, poketmon);
+            String str = br.readLine();
+            map1.put(i, str);
+            map2.put(str, i);
         }
-
-        for(int j=0; j<m; j++) {
-            String problem = br.readLine();
-
-            if(Character.isDigit(problem.charAt(0))) {
-                System.out.println(reverseMap.get(Integer.parseInt(problem)));
+        for(int i=0; i<m; i++) {
+            String st = br.readLine();
+            boolean flag = false;
+            for(int j=0; j<st.length(); j++) {
+                char ch = st.charAt(j);
+                if(Character.isDigit(ch)) {
+                    flag = true;
+                } else {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) {
+                int k = Integer.parseInt(st);
+                if(map1.containsKey(k)) {
+                    System.out.println(map1.get(k));
+                }
             } else {
-                System.out.println(map.get(problem));
+                if(map2.containsKey(st)) {
+                    System.out.println(map2.get(st));
+                }
             }
         }
     }
