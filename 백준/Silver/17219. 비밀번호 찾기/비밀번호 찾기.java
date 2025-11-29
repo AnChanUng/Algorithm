@@ -10,24 +10,17 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-
         int n = Integer.parseInt(st.nextToken()); // 사이트 주소의 수
         int m = Integer.parseInt(st.nextToken()); // 비밀번호를 찾으려는 사이트 주소의 수
 
         HashMap<String, String> map = new HashMap<>();
         for(int i=0; i<n; i++) {
-            String[] inputs = br.readLine().split(" ");
-            String site = inputs[0];
-            String password = inputs[1];
-
-            map.put(site, password);
+            st = new StringTokenizer(br.readLine());
+            map.put(st.nextToken(), st.nextToken());
         }
 
         for(int i=0; i<m; i++) {
-            String str = br.readLine();
-            if(map.containsKey(str)) {
-                sb.append(map.get(str)).append("\n");
-            }
+            sb.append(map.get(br.readLine())).append("\n");
         }
         System.out.println(sb);
     }
