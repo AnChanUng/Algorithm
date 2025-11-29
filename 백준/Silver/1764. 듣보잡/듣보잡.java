@@ -1,38 +1,39 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
-        String[] inputs = br.readLine().split(" ");
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(inputs[0]);
-        int m = Integer.parseInt(inputs[1]);
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
 
-        Set<String> set = new HashSet<>();
+        HashMap<String, Integer> map = new HashMap<>();
         for(int i=0; i<n; i++) {
-            set.add(br.readLine());
+            map.put(br.readLine(), 1);
         }
 
-        ArrayList<String> ans = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
         for(int i=0; i<m; i++) {
             String str = br.readLine();
-            if(set.contains(str)) {
-                ans.add(str);
+            map.put(str, map.getOrDefault(str, 0) + 1);
+            if(map.get(str) == 2) {
+                list.add(str);
             }
         }
 
-        Collections.sort(ans);
-        System.out.println(ans.size());
+        Collections.sort(list);
+        sb.append(list.size()).append("\n");
 
-        for(int i=0; i<ans.size(); i++) {
-            System.out.println(ans.get(i));
+        for(int i=0; i<list.size(); i++) {
+            sb.append(list.get(i)).append(" ");
         }
+
+        System.out.println(sb);
     }
 }
