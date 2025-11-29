@@ -1,40 +1,49 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 
-class Main {
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int m = Integer.parseInt(br.readLine());
-        int set = 0; // 집합을 표현하는 비트마스크
-
         StringBuilder sb = new StringBuilder();
-        
-        for(int i=0; i<m; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            String oper = st.nextToken();
-            int n = 0;
 
-            if(st.hasMoreTokens()) {
-                n = Integer.parseInt(st.nextToken());
-            }
+        int n = Integer.parseInt(br.readLine());
 
-            int mask = 1 << (n-1); // n번째 비트가 위치한 마스크
-            
-            if(oper.equals("add")) {
-                set |= mask; // n번째 비트를 1로 설정
-            } else if(oper.equals("remove")) {
-                set &= ~mask; // n번째 비트를 0으로 설정
-            } else if(oper.equals("check")) {
-                sb.append((set & mask) != 0 ? "1\n" : "0\n"); // n번째 비트가 1인지 확인
-            } else if(oper.equals("toggle")) {
-                set ^= mask; // n번째 비트 반전
-            } else if(oper.equals("all")) {
-                set = (1 << 20) - 1; // 1부터 20까지 모든 비트를 1로 설정
-            } else if(oper.equals("empty")) {
-                set = 0; 
+        Set<Integer> set = new HashSet<>();
+        for(int i=0; i<n; i++) {
+            String[] inputs = br.readLine().split(" ");
+            String order = inputs[0];
+
+            if (order.equals("all")) {
+                set.clear();
+                for(int j=1; j<=20; j++) {
+                    set.add(j);
+                }
+            } else if (order.equals("empty")) {
+                set.clear();
+            } else {
+                int x = Integer.parseInt(inputs[1]);
+                if (order.equals("add")) {
+                    set.add(x);
+                } else if (order.equals("remove")) {
+                    set.remove(x);
+                } else if (order.equals("check")) {
+                    if (set.contains(x)) {
+                        sb.append(1).append("\n");
+                    } else {
+                        sb.append(0).append("\n");
+                    }
+                } else if (order.equals("toggle")) {
+                    if (set.contains(x)) {
+                        set.remove(x);
+                    } else {
+                        set.add(x);
+                    }
+                }
             }
         }
-        System.out.print(sb.toString());
+        System.out.println(sb);
     }
 }
