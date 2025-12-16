@@ -52,10 +52,10 @@ public class Main {
                                 int nx = cur[1] + dx[dir];
 
                                 if(ny < 0 || ny >= n || nx < 0 || nx >= m) continue;
-                                if(graph[ny][nx] == 0) continue;
-
-                                graph[ny][nx] = 0;
-                                q.offer(new int[]{ny, nx});
+                                if(graph[ny][nx] == 1) {
+                                    graph[ny][nx] = 0;
+                                    q.offer(new int[]{ny, nx});
+                                }
                             }
                         }
                     }
