@@ -1,11 +1,9 @@
 class Solution {
     public String solution(String my_string, int n) {
-        StringBuilder sb = new StringBuilder();
+        String answer = "";
         
-        for(int i=0; i<n; i++) {
-            sb.append(my_string.charAt(i));
-        }
+        answer = my_string.substring(0, n);
         
-        return sb.toString();
+        return answer;
     }
 }
