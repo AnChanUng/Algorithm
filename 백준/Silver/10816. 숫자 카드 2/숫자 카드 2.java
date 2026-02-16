@@ -1,16 +1,18 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
+class Main {
+    static int n, m, a, b;
+    static Map<Integer, Integer> map = new HashMap<>();
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        HashMap<Integer, Integer> map = new HashMap<>();
-        String[] inputs = br.readLine().split(" ");
+        StringBuilder sb = new StringBuilder();
+        n = Integer.parseInt(br.readLine());
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i=0; i<n; i++) {
-            int a = Integer.parseInt(inputs[i]);
+            a = Integer.parseInt(st.nextToken());
             if(map.containsKey(a)) {
                 map.put(a, map.get(a) + 1);
             } else {
@@ -18,17 +20,16 @@ public class Main {
             }
         }
 
-        int m = Integer.parseInt(br.readLine());
-        String[] line = br.readLine().split(" ");
-        StringBuilder sb = new StringBuilder();
+        m = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
         for(int i=0; i<m; i++) {
-            int b = Integer.parseInt(line[i]);
+            b = Integer.parseInt(st.nextToken());
             if(map.containsKey(b)) {
-                sb.append(map.get(b)).append(" ");
+                sb.append(map.get(b)).append(" ");                                                                                                                                                                                                                                                                                                                                                                                                                             
             } else {
                 sb.append(0).append(" ");
             }
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }
