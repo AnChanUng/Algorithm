@@ -1,32 +1,29 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
+class Main {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String num1 = br.readLine();
-        String num2 = br.readLine();
-        String num3 = br.readLine();
+        int num = 0;
+        for(int i=0; i<3; i++) {
+            String str = br.readLine();
+            if(str.charAt(0) == 'F' || str.charAt(0) == 'B') {
+                continue;
+            } else {
+                num = Integer.valueOf(str) + 3 - i;
+            }
+        }
 
-        int num;
-
-        if(isNumber(num1)) num = Integer.parseInt(num1) + 3;
-        else if (isNumber(num2)) num = Integer.parseInt(num2) + 2;
-        else num = Integer.parseInt(num3) + 1;
-
-        System.out.println(getFizzBuzzNumber(num));
-    }
-
-    static boolean isNumber(String str) {
-        return !str.equals("Fizz") && !str.equals("Buzz") && !str.equals("FizzBuzz");
-    }
-
-    static String getFizzBuzzNumber(int num) {
-        if(num % 3 == 0 && num % 5 == 0) return "FizzBuzz";
-        else if (num % 3 == 0) return "Fizz";
-        else if (num % 5 == 0) return "Buzz";
-        else return Integer.toString(num);
+        if(num % 3 == 0 && num % 5 == 0) {
+            System.out.print("FizzBuzz");
+        } else if (num % 3 == 0 && num % 5 != 0) {
+            System.out.print("Fizz");
+        } else if (num % 3 != 0 && num % 5 == 0) {
+            System.out.print("Buzz");
+        } else {
+            System.out.print(num);
+        }
     }
 }
