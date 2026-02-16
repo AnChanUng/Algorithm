@@ -1,38 +1,63 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 /*
-    티셔츠 한장, 펜 한자루 (웰컴 키트)
-    티셔츠: S, M, L, XL, XXL, XXXL (6가지 사이즈) -> T장 묶음으로만 주문 가능
-    펜: P자루 묶음 or 한 자루씩 주문 가능
-    티셔츠 남아도 됨. 펜 남거나 부족하면x
- */
-public class Main {
-    public static void main(String[] args) throws IOException {
+  티셔츠는 남아도 되지만 부족해서는 x
+  펜은 남거나 부족해서는 안되고 정확한 참가자 수만큼 준비
+*/
+class Main {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         int n = Integer.parseInt(br.readLine());
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        StringBuilder sb = new StringBuilder();
-        int[] tShirt = new int[6]; // 티셔츠 (S, M, L, XL, XXL, XXXL)
-
-        for(int i=0; i<6; i++) {
-            tShirt[i] = Integer.parseInt(st.nextToken());
-        }
-        // 정수 티셔츠, 펜의 묶음 수
+        int s = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        int l = Integer.parseInt(st.nextToken());
+        int xl = Integer.parseInt(st.nextToken());
+        int xxl = Integer.parseInt(st.nextToken());
+        int xxxl = Integer.parseInt(st.nextToken());
+        
         st = new StringTokenizer(br.readLine());
-        int t = Integer.parseInt(st.nextToken());
-        int p = Integer.parseInt(st.nextToken());
-
-        int tCount = 0;
-        for(int i=0; i<tShirt.length; i++) {
-            tCount += (tShirt[i] + t - 1) / t;
+        int t = Integer.parseInt(st.nextToken()); // 정수 티셔츠
+        int p = Integer.parseInt(st.nextToken()); // 펜
+        
+        int cnt = 0;
+        if(s%t == 0) {
+            cnt += s/t;
+        } else {
+            cnt += s / t + 1;
         }
-        sb.append(tCount).append("\n");
-        sb.append(n / p).append(" ").append(n % p);
+        if(m%t == 0) {
+            cnt += m / t;
+        } else {
+            cnt += m / t + 1;
+        }
+        if(l%t == 0) {
+            cnt += l / t;
+        } else {
+            cnt += l / t + 1;
+        }
+        if(xl%t == 0) {
+            cnt += xl / t;
+        } else {
+            cnt += xl / t + 1;
+        }
+        if(xxl%t == 0) {
+            cnt += xxl / t;
+        } else {
+            cnt += xxl / t + 1;
+        }
+        if(xxxl%t == 0) {
+            cnt += xxxl / t;
+        } else {
+            cnt += xxxl / t + 1;
+        }
+        
+        int a = n / p;
+        int b = n % p;
 
-        System.out.println(sb);
+        System.out.println(cnt);
+        System.out.println(a + " " + b);
     }
 }
