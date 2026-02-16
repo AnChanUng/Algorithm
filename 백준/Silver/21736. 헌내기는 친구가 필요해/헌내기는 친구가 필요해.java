@@ -32,6 +32,7 @@ class Main {
                 if(graph[i][j] == 'I') {
                     x = i;
                     y = j;
+                    break;
                 }
             }
         }
@@ -54,13 +55,10 @@ class Main {
                 int nx = cur[0] + dx[dir];
                 int ny = cur[1] + dy[dir];
                 if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-                if(!vis[nx][ny] && graph[nx][ny] == 'O' || graph[nx][ny] == 'P') {
+                if(!vis[nx][ny] && (graph[nx][ny] == 'O' || graph[nx][ny] == 'P')) {
                     vis[nx][ny] = true;
                     q.add(new int[]{nx, ny});
-                    if(graph[nx][ny] == 'P') {
-                        cnt++;
-                        graph[nx][ny] = 'O';
-                    }
+                    if(graph[nx][ny] == 'P') cnt++;
                 }
             }
         }
