@@ -1,12 +1,7 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
-/* 
-    산성, 알칼리성
-    특성값: 산성 특성값 + 알칼리성 특성값
 
-    0에 가장 가까운 혼합 용액 만들기
-*/
 class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -19,29 +14,25 @@ class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        int left = 0;
-        int right = n-1;
-        int minValue = Integer.MAX_VALUE;
+        int left=0;
+        int right=n-1;
         int leftValue = 0;
         int rightValue = 0;
-        
+        int minValue = Integer.MAX_VALUE;
         while(left < right) {
             int sum = arr[left] + arr[right];
             int absSum = Math.abs(sum);
-            
             if(absSum < minValue) {
                 minValue = absSum;
                 leftValue = arr[left];
                 rightValue = arr[right];
             }
-
             if(sum < 0) {
                 left++;
             } else {
                 right--;
             }
         }
-        
-        System.out.print(leftValue + " " + rightValue);
+        System.out.println(leftValue + " " + rightValue);
     }
 }
