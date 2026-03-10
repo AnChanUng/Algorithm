@@ -1,14 +1,7 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
-/*
-    1. 입력 받기
-    2. 인구 이동
-    2.1 L <= 인구 차이 <= R 국경선 오픈
-    2.2 인접한 칸만을 이용해 연합국으로 이동
-    2.3 연합 인구수 : 각 칸의 인구수 합 / 전체 칸의 개수 
-    2.4 연합 해체, 국경선 닫기
-*/
+
 class Main {
     static int n, l, r;
     static int[][] graph;
@@ -32,9 +25,8 @@ class Main {
             }
         }
 
-        int count = 0;
-        
-        while(true) {
+        int cnt = 0;
+        while(true){
             vis = new boolean[n][n];
             boolean flag = false;
             
@@ -48,48 +40,41 @@ class Main {
                 }
             }
             if(!flag) break;
-            count++;
+            cnt++;
         }
-        System.out.println(count);
+        System.out.println(cnt);
     }
 
     static boolean bfs(int x, int y) {
-        Queue<int[]> q = new LinkedList<>();
-        List<int[]> union = new ArrayList<>();
-
-        q.offer(new int[]{x, y});
+        Queue<int[]> q= new LinkedList<>();
+        List<int[]> list = new ArrayList<>();
+        
         vis[x][y] = true;
-        union.add(new int[]{x, y});
-
+        q.offer(new int[]{x, y});
+        list.add(new int[]{x, y});
+        
         int sum = graph[x][y];
-
+        
         while(!q.isEmpty()) {
             int[] cur = q.poll();
-            int cx = cur[0];
-            int cy = cur[1];
-
             for(int dir=0; dir<4; dir++) {
-                int nx = cx + dx[dir];
-                int ny = cy + dy[dir];
+                int nx = cur[0] + dx[dir];
+                int ny = cur[1] + dy[dir];
 
-                if(nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
-                if(vis[nx][ny]) continue;
-
-                int diff = Math.abs(graph[cx][cy] - graph[nx][ny]);
-
+                if(nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
+                if (vis[nx][ny]) continue;
+                int diff = Math.abs(graph[cur[0]][cur[1]] - graph[nx][ny]);
                 if(l <= diff && diff <= r) {
                     vis[nx][ny] = true;
                     q.offer(new int[]{nx, ny});
-                    union.add(new int[]{nx, ny});
+                    list.add(new int[]{nx, ny});
                     sum += graph[nx][ny];
                 }
             }
         }
-        if(union.size() == 1) return false;
-
-        int avg = sum / union.size();
-
-        for(int[] country : union) {
+        if(list.size() == 1) return false;
+        int avg = sum / list.size();
+        for(int[] country : list) {
             graph[country[0]][country[1]] = avg;
         }
         
