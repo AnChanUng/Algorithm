@@ -11,30 +11,31 @@ class Main {
         int w = Integer.parseInt(st.nextToken());
 
         int[] arr = new int[w];
-        int maxH = 0;
-        int maxIdx = 0;
+        int maxHeight = 0;
+        int maxHeightIdx = 0;
         int total = 0;
+        
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<w; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
-            if(maxH < arr[i]) {
-                maxH = arr[i];
-                maxIdx = i;
+            if(arr[i] > maxHeight) {
+                maxHeight = arr[i];
+                maxHeightIdx = i;
             }
         }
 
         int cur = 0;
-        for(int i=0; i<maxIdx; i++) {
+        for(int i=0; i<maxHeightIdx; i++) {
             cur = Math.max(cur, arr[i]);
             total += cur - arr[i];
         }
 
         cur = 0;
-        for(int i=w-1; i>maxIdx; i--) {
+        for(int i=w-1; i>maxHeightIdx; i--) {
             cur = Math.max(cur, arr[i]);
             total += cur - arr[i];
         }
-        
-        System.out.print(total);
+
+        System.out.println(total);
     }
 }
