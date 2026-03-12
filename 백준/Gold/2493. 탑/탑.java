@@ -14,18 +14,25 @@ class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i=0; i<n; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
-
-            while(!stack.empty() && stack.peek()[0] <= arr[i]) {
-                stack.pop();
-            }
-            if(!stack.empty()) {
-                res[i] = stack.peek()[1];
-            } else {
-                res[i] = 0;
-            }
-            stack.add(new int[]{arr[i], i+1});
         }
 
+        stack.add(new int[]{arr[0], 1});
+        
+        int idx = 0;
+        for(int i=1; i<n; i++) {
+            if(!stack.isEmpty()) {
+                while(!stack.isEmpty()) {
+                    if(arr[i] >= stack.peek()[0]) {
+                        stack.pop();
+                    } else {
+                        res[i] = stack.peek()[1];
+                        break;
+                    }
+                }    
+            }
+            stack.push(new int[]{arr[i], i+1});
+        }
+ 
         for(int i=0; i<n; i++) {
             System.out.print(res[i] + " ");
         }
