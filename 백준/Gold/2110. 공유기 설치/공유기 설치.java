@@ -3,29 +3,37 @@ import java.lang.*;
 import java.io.*;
 
 class Main {
-    static int n, c;
-    static int[] arr;
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken()); // 집 개수
-        c = Integer.parseInt(st.nextToken()); // 공유기 개수
 
-        arr = new int[n];
+        int n = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
+
+        int[] arr = new int[n];
         
         for(int i=0; i<n; i++) {
-            arr[i] = Integer.parseInt(br.readLine()); // 집의 좌표
+            arr[i] = Integer.parseInt(br.readLine());
         }
 
         Arrays.sort(arr);
-            
+
         int left = 1;
         int right = arr[n-1] - arr[0];
         int answer = 0;
         while(left <= right) {
             int mid = (left + right) / 2;
+            int last = arr[0];
+            int cnt = 1;
+            
+            for(int i=1; i<n; i++) {
+                if(arr[i] - last >= mid) {
+                    cnt++;
+                    last = arr[i];
+                }
+            }
 
-            if(canInstall(mid)) {
+            if(cnt >= c) {
                 answer = mid;
                 left = mid + 1;
             } else {
@@ -33,17 +41,5 @@ class Main {
             }
         }
         System.out.println(answer);
-    }
-    static boolean canInstall(int dist) {
-        int cnt = 1;
-        int last = arr[0];
-
-        for(int i=1; i<n; i++) {
-            if(arr[i] - last >= dist) {
-                cnt++;
-                last = arr[i];
-            }
-        }
-        return cnt >= c;
     }
 }
