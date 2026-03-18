@@ -15,17 +15,18 @@ class Main {
 
         r = Integer.parseInt(st.nextToken());
         c = Integer.parseInt(st.nextToken());
-        
+
         arr = new char[r][c];
         vis = new boolean[26];
-        maxCnt = 0;
+        
         for(int i=0; i<r; i++) {
-            String s = br.readLine();
+            String str = br.readLine();
             for(int j=0; j<c; j++) {
-                arr[i][j] = s.charAt(j);
+                arr[i][j] = str.charAt(j);
             }
         }
-        vis[arr[0][0] - 'A'] = true;
+        maxCnt = 0;
+        vis[arr[0][0]-'A'] = true;
         dfs(0, 0, 1);
         System.out.println(maxCnt);
     }
@@ -35,15 +36,14 @@ class Main {
         for(int dir=0; dir<4; dir++) {
             int nx = x + dx[dir];
             int ny = y + dy[dir];
-
             if(nx < 0 || nx >= r || ny < 0 || ny >= c) continue;
 
-            char next = arr[nx][ny];
-            
-            if(!vis[next - 'A']) {
-                vis[next - 'A'] = true;
-                dfs(nx, ny, cnt + 1);
-                vis[next - 'A'] = false;
+            int next = arr[nx][ny] - 'A';
+
+            if(!vis[next]) {
+                vis[next] = true;
+                dfs(nx, ny, cnt+1);
+                vis[next] = false;
             }
         }
     }
