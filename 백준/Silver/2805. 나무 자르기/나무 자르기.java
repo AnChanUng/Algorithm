@@ -18,11 +18,11 @@ class Main {
 
         Arrays.sort(arr);
 
-        long left = 1;
-        long right = arr[n-1];
-        long maxMid = 0;
+        int left = 1;
+        int right = arr[n-1];
+        int maxMid = 0;
         while(left <= right) {
-          long mid = (left + right) / 2;
+          int mid = (left + right) / 2;
           long total = 0;
           for(int i=0; i<n; i++) {
             if(arr[i] < mid) { // 지정한 높이보다 작으면 -> 현재높이 = 그대로
