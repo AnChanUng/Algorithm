@@ -1,50 +1,46 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
-/*
-    문제
-    1.1 나무의 수(N), 나무의 길이(M) 입력 받기
-    1.2 나무의 높이 입력 받기
-    2.  1부터 입력받은 나무의 최대 길이까지 점점 증가
-    2.1 절단기의 나무가 최대값이면 업데이트
-    3   최대값 출력
- */
-public class Main {
-    public static void main(String[] args) throws IOException {
+import java.util.*;
+import java.io.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken()); // 나무의 수
+        int m = Integer.parseInt(st.nextToken()); // 나무의 길이
 
         int[] arr = new int[n];
+
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<n; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+          arr[i] = Integer.parseInt(st.nextToken());
         }
+
         Arrays.sort(arr);
 
-        int left = 0;
-        int right = arr[n-1];
-        int maxHeight = 0;
+        long left = 1;
+        long right = arr[n-1];
+        long maxMid = 0;
         while(left <= right) {
-            int mid = (left + right) / 2;
+          long mid = (left + right) / 2;
+          long total = 0;
+          for(int i=0; i<n; i++) {
+            if(arr[i] < mid) { // 지정한 높이보다 작으면 -> 현재높이 = 그대로
+              continue;
+            } else { // 지정한 높이보다 높으면 -> 현재높이 = 지정한 높이
+              total += arr[i] - mid;
+            }
+          }
 
-            long result = 0;
-            for(int i=0; i<n; i++) {
-                if(arr[i] >= mid) {
-                    result += arr[i] - mid;
-                }
-            }
-            if(result >= m) {
-                maxHeight = mid;
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
+          if(total >= m) { // m이 최대면 maxMid값 mid로 변경
+              maxMid = Math.max(maxMid, mid);
+              left = mid + 1;
+              //System.out.println("maxMid: " + maxMid + " left: " + left);
+          } else {
+              right = mid - 1;
+              //System.out.println("maxaMid: " + maxMid + " right: " + right);
+          } 
         }
-        System.out.println(maxHeight);
+        System.out.println(maxMid);
     }
 }
