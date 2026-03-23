@@ -3,71 +3,49 @@ import java.lang.*;
 import java.io.*;
 
 class Main {
+    static char[][] arr = new char[3][3];
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        StringBuilder sb = new StringBuilder();
+        
         while(true) {
-            String s = br.readLine();
-            if(s.equals("end")) break;
-
-            int cntx = 0;
-            int cnto = 0;
-
-            for(int i=0; i<9; i++) {
-                if(s.charAt(i) == 'X') cntx++;
-                else if(s.charAt(i) == 'O') cnto++;
-            }
-
-            boolean xflag = false;
-            boolean oflag = false;
-
-            // 가로
-            for(int i=0; i<=6; i+=3) {
-                if(s.charAt(i) == 'X' && s.charAt(i+1) == 'X' && s.charAt(i+2) == 'X') xflag = true;
-                if(s.charAt(i) == 'O' && s.charAt(i+1) == 'O' && s.charAt(i+2) == 'O') oflag = true;
-            }
-
-            // 세로
-            for(int i=0; i<3; i++) {
-                if(s.charAt(i) == 'X' && s.charAt(i+3) == 'X' && s.charAt(i+6) == 'X') xflag = true;
-                if(s.charAt(i) == 'O' && s.charAt(i+3) == 'O' && s.charAt(i+6) == 'O') oflag = true;
-            }
-
-            // 대각선
-            for(int i=0; i<3; i++) {
-                if(i == 1) continue;
-                if(i == 0) {
-                    if(s.charAt(i) == 'X' && s.charAt(i+4) == 'X' && s.charAt(i+8) == 'X') xflag = true;
-                    if(s.charAt(i) == 'O' && s.charAt(i+4) == 'O' && s.charAt(i+8) == 'O') oflag = true;
-                }
-
-                if(i == 2) {
-                    if(s.charAt(i) == 'X' && s.charAt(i+2) == 'X' && s.charAt(i+4) == 'X') xflag = true;
-                    if(s.charAt(i) == 'O' && s.charAt(i+2) == 'O' && s.charAt(i+4) == 'O') oflag = true;
-                }
-            }
-            if(cntx != cnto && cntx != cnto+1) {
-                System.out.println("invalid");
-                continue;
-            }
+            String line = br.readLine();
+            if(line.equals("end")) break;
             
-            // 무승부 + 꽉참
-            if(!xflag && !oflag && cntx == 5 && cnto == 4) {
-                System.out.println("valid");
-                continue;
+            int idx = 0;
+            int oCnt = 0, xCnt = 0;
+            for(int i=0; i<3; i++) {
+                for(int j=0; j<3; j++) {
+                    arr[i][j] = line.charAt(idx++);
+                    if(arr[i][j] == 'X') xCnt++;
+                    else if(arr[i][j] == 'O') oCnt++;
+                }
             }
 
-            if(oflag && !xflag) {
-                if(cnto == cntx) System.out.println("valid");
-                else System.out.println("invalid");
-                continue;
-            } else if (xflag && !oflag) {
-                if(cntx - 1 == cnto) System.out.println("valid");
-                else System.out.println("invalid");
-                continue;
+            boolean xWin = isWin('X');
+            boolean oWin = isWin('O');
+
+            if(xWin && !oWin && xCnt == oCnt + 1) {
+                sb.append("valid");
+            } else if (oWin && !xWin && xCnt == oCnt) {
+                sb.append("valid");
+            } else if (!xWin && !oWin && xCnt == 5 && oCnt == 4) {
+                sb.append("valid");
             } else {
-                System.out.println("invalid");
+                sb.append("invalid");
             }
+            sb.append("\n");
         }
+        System.out.print(sb);
     }
+
+    static boolean isWin(char c) {
+        for(int i=0; i<3; i++) {
+            if(arr[i][0] == c && arr[i][1] == c && arr[i][2] == c) return true;
+            if(arr[0][i] == c && arr[1][i] == c && arr[2][i] == c) return true;
+        }
+        if (arr[0][0] == c && arr[1][1] == c && arr[2][2] == c) return true;
+        if (arr[0][2] == c && arr[1][1] == c && arr[2][0] == c) return true;
+        return false;
+    } 
 }
