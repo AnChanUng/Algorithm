@@ -1,45 +1,40 @@
-import java.util.HashSet;
-import java.util.Iterator;
-
 class Solution {
-    HashSet<Integer> numberSet = new HashSet<>();
-    public boolean isPrime(int num) {
-        if(num == 0 || num == 1) {
-            return false;
-        }
-        
-        for(int i=2; i<=(int)Math.sqrt(num); i++) {
-            if(num % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-    public void recursive(String comb, String others) {
-        // 1. 현재 조합을 set에 추가한다.
-        if(!comb.equals("")) {
-            numberSet.add(Integer.valueOf(comb));
-        }
-        // 2. 남은 숫자 중 한개를 더해 새로운 조합을 만든다.
-        for(int i=0; i<others.length(); i++) {
-            recursive(comb + others.charAt(i), others.substring(0, i) + others.substring(i+1));
-        }
-    }
+    static boolean[] vis;
+    static boolean[] visNum;
+    static int cnt = 0;
     public int solution(String numbers) {
-        int count = 0;
-        // 1. 모든 숫자의 조합을 만든다.
-        recursive("", numbers);
-        
-        System.out.println(numberSet);
-        // 2. 소수의 개수만 센다
-        Iterator<Integer> it = numberSet.iterator();
-        while(it.hasNext()) {
-            int number = it.next();
-            if(isPrime(number)) {
-                count++;
+        vis = new boolean[numbers.length()];
+        visNum = new boolean[10000000];
+        dfs(numbers, "", 0);
+        return cnt;
+    }
+    
+    static void dfs(String arr, String str, int depth) {
+        if(!str.isEmpty()) {
+            if(str.charAt(0) == '0') return;
+            int num = Integer.parseInt(str);
+            if(!visNum[num] && !isPrime(num)) {
+                cnt++;
             }
         }
         
-        return count;
+        for(int i=0; i<arr.length(); i++) {
+            if(!vis[i]) {
+                vis[i] = true;
+                dfs(arr, str + arr.charAt(i), depth+1);
+                vis[i] = false;
+            }
+        }
+    }
+    
+    static boolean isPrime(int num) {
+        if(num <= 1) return true;
+        for(int i=2; i<num; i++) {
+            if(num % i == 0) {
+                return true;
+            }
+        }
+        visNum[num] = true;
+        return false;
     }
 }
