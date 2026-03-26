@@ -8,7 +8,6 @@ class Main {
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, -1, 0, 1};
     static int maxCnt;
-    static int cnt;
     static int r, c;
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -28,24 +27,21 @@ class Main {
         }
 
         maxCnt = 0;
-        cnt = 1;
-        dfs(0, 0);
+        alpha[arr[0][0]-'A'] = true;
+        dfs(0, 0, 1);
         System.out.print(maxCnt);
     }
-    static void dfs(int x, int y) {
+    static void dfs(int x, int y, int cnt) {
         //System.out.println("x: " + x + " y: "  + y + " cnt: " + cnt + " maxCnt: " + maxCnt);
         maxCnt = Math.max(maxCnt, cnt);
-        alpha[arr[x][y]-'A'] = true;
         for(int dir=0; dir<4; dir++) {
             int nx = x + dx[dir];
             int ny = y + dy[dir];
             if(nx < 0 || nx >= r || ny < 0 || ny >= c) continue;
             if(!alpha[arr[nx][ny]-'A']) {
-                cnt++;
                 alpha[arr[nx][ny]-'A'] = true;
-                dfs(nx, ny);
+                dfs(nx, ny, cnt+1);
                 alpha[arr[nx][ny]-'A'] = false;
-                cnt--;
             } 
         }
     }
