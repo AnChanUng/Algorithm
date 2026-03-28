@@ -1,39 +1,44 @@
 import java.util.*;
-
 class Solution {
     public int[] solution(String[] genres, int[] plays) {
+        List<Integer> answer = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>(); // genres, 플레이횟수 2개까지만 저장
         
-        ArrayList<Integer> answer = new ArrayList<>();
-        HashMap<String, Integer> num = new HashMap<>();
-        HashMap<String, HashMap<Integer, Integer>> music = new HashMap<>();
-        
-        for(int i=0; i<plays.length; i++) {
-            if(!num.containsKey(genres[i])) {
-                HashMap<Integer, Integer> map = new HashMap<>();
-                map.put(i, plays[i]);
-                music.put(genres[i], map);
-                num.put(genres[i], plays[i]);
+        // 1.장르별 총 재생수 집계
+        for(int i=0; i<genres.length; i++) {
+            if(!map.containsKey(genres[i])) {
+                map.put(genres[i], plays[i]);
             } else {
-                music.get(genres[i]).put(i, plays[i]);
-                num.put(genres[i], num.get(genres[i]) + plays[i]);
+                map.put(genres[i], map.get(genres[i]) + plays[i]);
             }
         }
         
-        List<String> keySet = new ArrayList(num.keySet());
-        Collections.sort(keySet, (s1, s2) -> num.get(s2) - (num.get(s1)));
-        
-        for(String key : keySet) {
-            HashMap<Integer, Integer> map = music.get(key);
-            List<Integer> genre_key = new ArrayList(map.keySet());
-            
-            Collections.sort(genre_key, (s1, s2) -> map.get(s2) - (map.get(s1)));
-            
-            answer.add(genre_key.get(0));
-            if(genre_key.size() > 1) {
-                answer.add(genre_key.get(1));
+        // 2.장르별 곡 목록 저장
+        Map<String, List<int[]>> song = new HashMap<>(); // [재생수, 고유번호]
+        for(int i=0; i<genres.length; i++) {
+            if(!song.containsKey(genres[i])) {
+                song.put(genres[i], new ArrayList<>());
             }
+            song.get(genres[i]).add(new int[]{plays[i], i});
         }
         
-        return answer.stream().mapToInt(i -> i).toArray();
+        // 3.장르를 총 재생수 내림차순 정렬
+        List<String> sortedGenres = new ArrayList<>(map.keySet());
+        sortedGenres.sort((a, b) -> map.get(b)-map.get(a));
+        
+        // 4.장르에서 재생수 내림차순 2곡 뽑기
+        for(String genre : sortedGenres) {
+            List<int[]> songs = song.get(genre);
+            songs.sort((a, b) -> Integer.compare(b[0], a[0]));
+            for(int i=0; i<Math.min(2, songs.size()); i++) {
+                answer.add(songs.get(i)[1]);
+            }
+        }
+        int[] result = new int[answer.size()];
+        for(int i=0; i<answer.size(); i++) {
+            result[i] = answer.get(i);
+        }
+        
+        return result;
     }
 }
