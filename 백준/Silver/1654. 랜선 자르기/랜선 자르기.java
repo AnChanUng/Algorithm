@@ -11,30 +11,31 @@ class Main {
         int n = Integer.parseInt(st.nextToken());
 
         int[] arr = new int[k];
-
         for(int i=0; i<k; i++) {
             arr[i] = Integer.parseInt(br.readLine());
         }
 
         Arrays.sort(arr);
-
+        
         long left = 1;
         long right = arr[k-1];
-        long maxLen = 0;
+        long answer = 0;
         while(left <= right) {
             long mid = (left + right) / 2;
-            long len = 0;
-            for(int i=0; i<k; i++) {
-                len += arr[i] / mid;
-            }
+            long cnt = 0;
 
-            if (len < n) {
-                right = mid - 1;
-            } else {
-                maxLen = mid;
+            for(int i=0; i<k; i++) {
+                cnt += arr[i] / mid;
+            }
+            //System.out.println("mid: "+ mid + " cnt: " + cnt);
+            
+            if(cnt >= n) {
                 left = mid + 1;
+                 answer = mid;
+            } else {
+                right = mid - 1;
             }
         }
-        System.out.println(maxLen);
+        System.out.println(answer);
     }
 }
