@@ -3,15 +3,15 @@ class Solution {
         String answer = "";
         
         for(int i=0; i<s.length(); i++) {
-            char ch = s.charAt(i);
+            char c = s.charAt(i);
             
-            if(Character.isLowerCase(ch)) {
-                ch = (char) ((ch - 'a' + n) % 26 + 'a');
-            } else if(Character.isUpperCase(ch)) {
-                ch = (char) ((ch - 'A' + n) % 26 + 'A');
+            if('a' <= c && c <= 'z') {
+                answer += (char)('a' + (c - 'a' + n) % 26);
+            } else if ('A' <= c && c <= 'Z') {
+                answer += (char)('A' + (c - 'A' + n) % 26);
+            } else {
+                answer += " ";
             }
-            
-            answer += ch;
         }
         return answer;
     }
