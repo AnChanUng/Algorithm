@@ -1,26 +1,25 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
-/* dfs 조합 */ 
+
 class Main {
-    static int k;
     static int[] arr;
-    static int[] select;
+    static int[] selected;
+    static int k;
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
         
         while(true) {
-            st = new StringTokenizer(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine());
             k = Integer.parseInt(st.nextToken());
-            if(k == 0) break;
             
+            if(k == 0) break;
             arr = new int[k];
-            select = new int[6];
+            selected = new int[6];
+            
             for(int i=0; i<k; i++) {
                 arr[i] = Integer.parseInt(st.nextToken());
             }
-
             dfs(0, 0);
             System.out.println();
         }
@@ -28,13 +27,13 @@ class Main {
     static void dfs(int start, int depth) {
         if(depth == 6) {
             for(int i=0; i<6; i++) {
-                System.out.print(select[i] + " ");
+                System.out.print(selected[i] + " ");
             }
             System.out.println();
             return;
         }
-        for(int i=start; i<k; i++) {
-            select[depth] = arr[i];
+        for(int i=start; i<arr.length; i++) {
+            selected[depth] = arr[i];
             dfs(i+1, depth+1);
         }
     }
