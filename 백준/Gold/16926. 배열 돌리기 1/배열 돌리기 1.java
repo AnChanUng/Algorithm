@@ -19,22 +19,29 @@ class Main {
           }
         }
 
-        for(int s=0; s<Math.min(n,m)/2; s++) {
+        for(int s=0; s<Math.min(n, m) / 2; s++) {
           for(int rot=0; rot<r; rot++) {
-            int temp = arr[s][s];  // (0,0) 백업
-            // 1. 위쪽 변: (s,s) ← (s,s+1) ← ... ← (s, m-1-s)
-            for(int j=s; j<m-1-s; j++)
-                arr[s][j] = arr[s][j+1];
-            // 2. 오른쪽 변: (s, m-1-s) ← (s+1, m-1-s) ← ... ← (n-1-s, m-1-s)
-            for(int i=s; i<n-1-s; i++)
-                arr[i][m-1-s] = arr[i+1][m-1-s];
-            // 3. 아래쪽 변: (n-1-s, m-1-s) ← (n-1-s, m-2-s) ← ... ← (n-1-s, s)
-            for(int j=m-1-s; j>s; j--)
-                arr[n-1-s][j] = arr[n-1-s][j-1];
-            // 4. 왼쪽 변: (n-1-s, s) ← (n-2-s, s) ← ... ← (s+1, s)
-            for(int i=n-1-s; i>s+1; i--)
-                arr[i][s] = arr[i-1][s];
-            arr[s+1][s] = temp;  
+            int temp = arr[s][s];
+            // 맨위
+            for(int i=s; i<m-1-s; i++) {
+              arr[s][i] = arr[s][i+1];
+            }
+
+            // 맨오른쪽
+            for(int i=s; i<n-1-s; i++) {
+              arr[i][m-1-s] = arr[i+1][m-1-s];
+            }
+
+            // 맨아래
+            for(int i=m-1-s; i>s; i--) {
+              arr[n-s-1][i] = arr[n-s-1][i-1];
+            }
+
+            // 맨왼쪽
+            for(int i=n-1-s; i>s+1; i--) {
+              arr[i][s] = arr[i-1][s];
+            }
+            arr[s+1][s] = temp;
           }
         }
        
