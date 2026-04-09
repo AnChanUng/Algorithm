@@ -1,20 +1,17 @@
 class Solution {
     public int[] solution(int brown, int yellow) {
         int[] answer = new int[2];
-        int total = brown+yellow;
+
+        int width = brown + yellow;  
         
-        for(int width=3; width<=total; width++) {
-            if(total % width == 0) {
-                int height = total / width;
-                    
-                if ((width-2) * (height-2) == yellow) {
-                    answer[0] = Math.max(width, height);
-                    answer[1] = Math.min(width, height);
-                    break;
+        //(가로-2) × (세로-2) = yellow
+        for(int x=3; x<=width; x++) {
+            for(int y=3; y<=width; y++) {
+                if(x * y == width && (x-2) * (y-2) == yellow){
+                    return new int[]{y, x};
                 }
             }
-        }
-        
+        }  
         return answer;
     }
 }
