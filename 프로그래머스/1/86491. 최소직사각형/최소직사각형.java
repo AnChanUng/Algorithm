@@ -1,22 +1,29 @@
 import java.util.*;
-
 class Solution {
     public int solution(int[][] sizes) {
-
-        int garo = 0;
-        int sero = 0;
-        for(int[] arr : sizes) {
-            for(int item : arr) {
-                garo = Math.max(garo, item);
-            }
-        }
-
+        int answer = 0;
+        
         for(int i=0; i<sizes.length; i++) {
-            if (sero < Math.min(sizes[i][0], sizes[i][1])) {
-                sero = Math.min(sizes[i][0], sizes[i][1]);
+            if(sizes[i][0] < sizes[i][1]) {
+                int prev = sizes[i][1];
+                sizes[i][1] = sizes[i][0];
+                sizes[i][0] = prev;
             }
         }
         
-        return garo*sero;
+        Arrays.sort(sizes, (a, b) -> {
+            if(b[0] != a[0]) return Integer.compare(b[0], a[0]);
+            return Integer.compare(b[1], a[1]);
+        });
+        
+        // 가장 큰 숫자 찾기
+        int maxNum = 0;
+        for(int i=0; i<sizes.length; i++) {
+            maxNum = Math.max(sizes[i][1], maxNum);
+        }
+        
+        answer = sizes[0][0] * maxNum;
+        
+        return answer;
     }
 }
