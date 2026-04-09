@@ -1,16 +1,13 @@
 import java.util.*;
-
 class Solution {
     public int solution(int[] nums) {
-
-        Set<Integer> set = new HashSet<>();
-        
+        Map<Integer, Integer> map = new HashMap<>();
         for(int i=0; i<nums.length; i++) {
-            set.add(nums[i]);
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
         
-        int result = Math.min(set.size(), nums.length/2);
+        int type = Math.min(map.size(), nums.length/2);
         
-        return result;
+        return type;
     }
 }
