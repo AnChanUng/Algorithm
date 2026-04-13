@@ -14,25 +14,27 @@ class Main {
         for(int i=0; i<s.length(); i++) {
             char ch = s.charAt(i);
 
-            if(flag) {
-                out.append(ch);
-                if(ch == '>') flag = false;
-            } else {
+            if(flag) { // < 안일 때
+                word.append(ch);
+                if(ch == '>') {
+                    flag = false;
+                }
+            } else { // < 아닐때
                 if(ch == '<') {
-                    out.append(word.reverse());
-                    word.setLength(0);
-                    out.append(ch);
+                    word.append(out.reverse());
+                    out.setLength(0);
+                    word.append(ch);
                     flag = true;
                 } else if (ch == ' ') {
-                    out.append(word.reverse());
-                    word.setLength(0);
-                    out.append(ch);
-                } else {
+                    word.append(out.reverse());
+                    out.setLength(0);
                     word.append(ch);
+                } else {
+                    out.append(ch);
                 }
             }
         }
-        out.append(word.reverse());
-        System.out.print(out);
+        System.out.print(word);
+        System.out.print(out.reverse());
     }
 }
