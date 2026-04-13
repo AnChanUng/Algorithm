@@ -1,49 +1,37 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
+class Main {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        int n = Integer.parseInt(br.readLine());
+        int m = Integer.parseInt(br.readLine());
+        int set = 0;
 
-        Set<Integer> set = new HashSet<>();
-        for(int i=0; i<n; i++) {
-            String[] inputs = br.readLine().split(" ");
-            String order = inputs[0];
+        for(int i=0; i<m; i++) {
+          StringTokenizer st = new StringTokenizer(br.readLine());
+          String a = st.nextToken();
 
-            if (order.equals("all")) {
-                set.clear();
-                for(int j=1; j<=20; j++) {
-                    set.add(j);
-                }
-            } else if (order.equals("empty")) {
-                set.clear();
-            } else {
-                int x = Integer.parseInt(inputs[1]);
-                if (order.equals("add")) {
-                    set.add(x);
-                } else if (order.equals("remove")) {
-                    set.remove(x);
-                } else if (order.equals("check")) {
-                    if (set.contains(x)) {
-                        sb.append(1).append("\n");
-                    } else {
-                        sb.append(0).append("\n");
-                    }
-                } else if (order.equals("toggle")) {
-                    if (set.contains(x)) {
-                        set.remove(x);
-                    } else {
-                        set.add(x);
-                    }
-                }
-            }
+          if(a.equals("all")) {
+          set = (1 << 20) - 1;
+          } else if(a.equals("empty")) {
+              set = 0;
+          } else {
+              int b = Integer.parseInt(st.nextToken());
+              int mask = 1 << (b - 1);
+              
+              if(a.equals("add")) {
+                  set |= mask;
+              } else if(a.equals("remove")) {
+                  set &= ~mask;
+              } else if(a.equals("check")) {
+                  sb.append((set & mask) != 0 ? 1 : 0).append('\n');
+              } else if(a.equals("toggle")) {
+                  set ^= mask;
+              }
+          }
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }
