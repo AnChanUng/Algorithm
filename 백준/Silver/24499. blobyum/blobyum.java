@@ -24,8 +24,7 @@ class Main {
 
     int maxSum = sum;
     for(int i=0; i<n; i++) {
-      if(i + k >= n) sum += arr[(i+k) % n];
-      else sum += arr[i+k];
+      sum += arr[(i+k) % n];
       sum -= arr[i];
       //System.out.println("i+k: " + (i+k) + " sum: " + sum);
       maxSum = Math.max(maxSum, sum);
