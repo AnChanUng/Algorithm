@@ -1,30 +1,23 @@
+import java.util.*;
 class Solution {
-    static int[][] arr;
     static boolean[] vis;
-    static int size;
     static int cnt;
     public int solution(int n, int[][] computers) {
-        int answer = 0;
-        arr = computers;
-        size = n;
-        
+        cnt = 0;
         vis = new boolean[n];
         for(int i=0; i<n; i++) {
             if(!vis[i]) {
-                cnt = 0;
-                vis[i] = true;
-                dfs(i);
-                answer++;
+                dfs(computers, i);
+                cnt++;
             }
-        }
-        return answer;
+        }        
+        return cnt;
     }
-    
-    static void dfs(int node) {
-        for(int i=0; i<size; i++) {
-            if(!vis[i] && arr[node][i] == 1) {
-                vis[i] = true;
-                dfs(i);
+    static void dfs(int[][] computers, int node) {
+        vis[node] = true;
+        for(int i=0; i<computers.length; i++) {
+            if(computers[node][i] == 1 && !vis[i]) {
+                dfs(computers, i);
             }
         }
     }
