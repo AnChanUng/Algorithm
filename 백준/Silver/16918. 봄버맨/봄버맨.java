@@ -30,19 +30,8 @@ class Main {
                 res[i][j] = '.';
             }
         }
-        int time = 0;
-        while(true) {
-            time++;
-            // System.out.println();
-            // System.out.println(time + "초");
-            if(time == 1) {
-                // for(int i=0; i<r; i++) {
-                //     for(int j=0; j<c; j++) {
-                //         System.out.print(arr[i][j]);
-                //     }
-                //     System.out.println();
-                // }
-            } else if (time % 2 == 0) { 
+        for(int time=2; time<=n; time++) {
+            if (time % 2 == 0) { 
                 for(int i=0; i<r; i++) {
                     for(int j=0; j<c; j++) {
                         if(arr[i][j] == '.') {
@@ -72,28 +61,16 @@ class Main {
                     }
                 }
                 for(int i=0; i<r; i++) {
-                    for(int j=0; j<c; j++) {
-                        res[i][j] = '.';
-                    }
+                    Arrays.fill(res[i], '.');
                 }
             }
-            // for(int i=0; i<r; i++) {
-            //     for(int j=0; j<c; j++) {
-            //         System.out.print(arr[i][j]);
-            //     }
-            //     System.out.println();
-            // }
-            // System.out.println();
-
-            if(time >= n) {
-                for(int i=0; i<r; i++) {
-                    for(int j=0; j<c; j++) {
-                        if(res[i][j] == 'O') {
-                            arr[i][j] = 'O';
-                        }
-                    }
+        }
+        
+        for(int i=0; i<r; i++) {
+            for(int j=0; j<c; j++) {
+                if(res[i][j] == 'O') {
+                    arr[i][j] = 'O';
                 }
-                break;
             }
         }
         for(int i=0; i<r; i++) {
