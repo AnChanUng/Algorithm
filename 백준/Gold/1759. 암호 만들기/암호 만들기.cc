@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 int l, c;
+string st;
 string arr[17];
-string moeum[5] = {"a", "e", "i", "o", "u"};
 vector<string> v;
 
 /*
@@ -18,29 +18,31 @@ vector<string> v;
     - 조합
 */
 
-bool isMoeum(string c) {
-    return c == "a" || c == "e" || c == "i" || c == "o" || c == "u";
+bool isMoeum(string s) {
+    return s == "a" || s == "e" || s == "i" || s == "o" || s == "u"; 
 }
 
 void dfs(int depth, int start) {
     if(depth == l) {
-        int moeum;
-        int jaeum; 
+        int moeum = 0;
+        int jaeum = 0;
 
         for(int i=0; i<l; i++) {
-            if(isMoeum(arr[i])) moeum++;
-            else jaeum++;
+            if(isMoeum(arr[i])) {
+                moeum++;
+            } else {
+                jaeum++;
+            }
         }
-
         if(moeum >= 1 && jaeum >= 2) {
             for(int i=0; i<l; i++) {
                 cout << arr[i];
             }
-            cout <<"\n";
+            cout << "\n";
             return;
         }
     }
-    
+
     for(int i=start; i<v.size(); i++) {
         arr[depth] = v[i];
         dfs(depth+1, i+1);
@@ -50,7 +52,6 @@ void dfs(int depth, int start) {
 int main() {;
     cin >> l >> c;
     for(int i=0; i<c; i++) {
-        string st;
         cin >> st;
         v.push_back(st);
     }
