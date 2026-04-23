@@ -21,6 +21,7 @@ public class Main {
         }
         
         int q = Integer.parseInt(br.readLine()); // 질문의 수
+        StringBuilder sb = new StringBuilder();
         for(int t=0; t<q; t++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             String str = st.nextToken(); 
@@ -28,7 +29,8 @@ public class Main {
             int r = Integer.parseInt(st.nextToken());
 
             int res = count[r+1][str.charAt(0) - 'a'] - count[l][str.charAt(0) - 'a'];
-            System.out.println(res);
+            sb.append(res).append('\n');
         }
+        System.out.println(sb);
     }
 }
