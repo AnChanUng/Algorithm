@@ -12,8 +12,7 @@ import java.io.*;
 */
 public class Main {
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s = br.readLine();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));        String s = br.readLine();
         int q = Integer.parseInt(br.readLine()); // 질문의 수
         for(int t=0; t<q; t++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -21,14 +20,23 @@ public class Main {
             int l = Integer.parseInt(st.nextToken()); // 문자열 구간
             int r = Integer.parseInt(st.nextToken());
 
-            int cnt = 0;
-            for(int i=l; i<=r; i++) {
+            int[] count = new int[s.length()+1];
+            int sum = 0;
+            for(int i=0; i<s.length(); i++) {
                 char ch = s.charAt(i);
                 if(String.valueOf(ch).equals(str)) {
-                    cnt++;
+                    sum++;
                 }
+                count[i] = sum;
             }
-            System.out.println(cnt);
+
+            if(l <= 0) {
+                System.out.println(count[r]);
+            } else {
+                int result = count[r] - count[l-1];
+                System.out.println(result);
+            }
+            
         }
     }
 }
