@@ -5,14 +5,21 @@ import java.io.*;
 
    알고리즘: 누적합
    자료구조: 배열
-
-   1. for문 i<s.length();
-   2. s.substring(l, r+1)에서 a가 나오면 카운트
-   3. 카운트 출력
 */
 public class Main {
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));        String s = br.readLine();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));        
+        String s = br.readLine();
+        
+        int[][] count = new int[s.length()+1][26];
+        int sum = 0;
+        for(int i=0; i<s.length(); i++) {
+            for(int j=0; j<26; j++) {
+                count[i+1][j] = count[i][j];
+            }
+            count[i+1][s.charAt(i)-'a']++;
+        }
+        
         int q = Integer.parseInt(br.readLine()); // 질문의 수
         for(int t=0; t<q; t++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -20,23 +27,8 @@ public class Main {
             int l = Integer.parseInt(st.nextToken()); // 문자열 구간
             int r = Integer.parseInt(st.nextToken());
 
-            int[] count = new int[s.length()+1];
-            int sum = 0;
-            for(int i=0; i<s.length(); i++) {
-                char ch = s.charAt(i);
-                if(String.valueOf(ch).equals(str)) {
-                    sum++;
-                }
-                count[i] = sum;
-            }
-
-            if(l <= 0) {
-                System.out.println(count[r]);
-            } else {
-                int result = count[r] - count[l-1];
-                System.out.println(result);
-            }
-            
+            int res = count[r+1][str.charAt(0) - 'a'] - count[l][str.charAt(0) - 'a'];
+            System.out.println(res);
         }
     }
 }
