@@ -1,19 +1,27 @@
 import java.util.*;
 class Solution {
     public int solution(int[] scoville, int K) {
-        int count = 0;
+        int cnt = 0;
         
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        for(int x : scoville) pq.add(x);
         
-        while(pq.size() > 1 && pq.peek() < K) {
-            int first = pq.poll();
-            int second = pq.poll();
-            pq.add(first + second * 2);
-            count++;
+        for(int i=0; i<scoville.length; i++) {
+            pq.add(scoville[i]);
         }
-        if(pq.peek() < K) return -1;
+
+        // 모든음식이 k이상일 때
+        while(pq.size() >= 2 && pq.peek() < K) {
+            int a = pq.poll();
+            int b = pq.poll();
+            pq.add(a + (b * 2));
+            cnt++;
+        }
+        for(int x : pq) {
+            if(x < K) {
+                return -1;
+            }
+        }
         
-        return count;
+        return cnt;
     }
 }
