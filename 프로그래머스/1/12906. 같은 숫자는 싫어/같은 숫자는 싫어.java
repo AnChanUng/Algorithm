@@ -1,26 +1,26 @@
 import java.util.*;
 
 public class Solution {
-    public int[] solution(int [] arr) {
+    public int[] solution(int[] arr) {
+        List<Integer> list = new ArrayList<>();
         
-        Stack<Integer> st = new Stack<>();
-        st.add(arr[0]);
-        for(int i=1; i<arr.length; i++) {
-            if(st.peek() != arr[i]) {
-                st.add(arr[i]);
+        Stack<Integer> stack = new Stack<>();
+        for(int i=0; i<arr.length; i++) {
+            if(stack.isEmpty()) {
+                list.add(arr[i]);
+                stack.push(arr[i]);
+            } else {
+                if(stack.peek() != arr[i]) {
+                    list.add(arr[i]);
+                    stack.push(arr[i]);
+                }
             }
         }
-        
-        // Stack을 배열로 변환
-        Integer[] stArray = new Integer[st.size()];
-        st.toArray(stArray);
-        
-        // 배열을 사용하여 값에 접근
-        int[] answer = new int[stArray.length];
-        for(int i=0; i<st.size(); i++) {
-            answer[i] = stArray[i];
+        int[] res = new int[list.size()];
+        for(int i=0; i<res.length; i++) {
+            res[i] = list.get(i);
         }
         
-        return answer;
+        return res;
     }
 }
