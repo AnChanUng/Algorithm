@@ -1,46 +1,40 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
+import java.util.*;
 class Solution {
-    public int[] solution(int[] progresses, int[] speeds) {
-        int[] answer = {};
-        
-        Queue<Integer> q = new LinkedList<Integer>();
-        
+    public int[] solution(int[] progresses, int[] speeds) {        
+        int[] arr = new int[progresses.length];
+        Stack<Integer> stack = new Stack<>();
         for(int i=0; i<progresses.length; i++) {
-            if ((100 - progresses[i]) % speeds[i] == 0) {
-                int res = (100 - progresses[i]) / speeds[i];
-                q.add(res);
-            } else {
-                int res = (100 - progresses[i]) / speeds[i] + 1;
-                q.add(res);
+            // 작업하는데 걸리는 시간 (100이 넘으면 끝)
+            int time = 1;
+            while(true) {
+                int work = progresses[i] + (speeds[i] * time);
+                if(work >= 100) break;
+                time++;
             }
+            arr[i] = time;
         }
-        
-        List<Integer> list = new ArrayList<Integer>();
-        
-        int cnt = 0;
-        int before = q.peek();
-        while(!q.isEmpty()) {
-            if(q.peek() <= before) {
-                q.poll();
-                cnt++;
+        List<Integer> list = new ArrayList<>();
+        int cnt = 1;
+        for(int i=0; i<arr.length; i++) {
+            if(stack.isEmpty()) {
+                stack.push(arr[i]);
             } else {
-                list.add(cnt);
-                cnt = 1;
-                before = q.poll();
+                if(stack.peek() >= arr[i]) {
+                   cnt++; 
+                } else {
+                    stack.push(arr[i]);
+                    list.add(cnt);
+                    cnt = 1;
+                }
             }
         }
         list.add(cnt);
         
-        answer = new int[list.size()];
-        
+        int[] res = new int[list.size()];
         for(int i=0; i<list.size(); i++) {
-            answer[i] = list.get(i);
+            res[i] = list.get(i);
         }
         
-        return answer;
+        return res;
     }
 }
