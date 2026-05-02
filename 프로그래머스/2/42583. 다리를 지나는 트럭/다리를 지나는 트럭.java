@@ -1,29 +1,37 @@
 import java.util.*;
-
 class Solution {
     public int solution(int bridge_length, int weight, int[] truck_weights) {
-        int answer = 0;
+        int time = 0;
         
-        Queue<Integer> bridge = new LinkedList<>();
-        
+        // 대기 트럭
+        Deque<Integer> dq = new ArrayDeque<>();
+        for(int i=0; i<truck_weights.length; i++) {
+            dq.add(truck_weights[i]);
+        }
+       
+        // 다리를 건너는 트럭
+        Queue<Integer> truck = new LinkedList<>();
         for(int i=0; i<bridge_length; i++) {
-            bridge.offer(0);
+            truck.add(0);
         }
         
-        int index=0;
-        int currentWeight=0;
-        while(index < truck_weights.length) {
-            currentWeight -= bridge.poll();
-            answer++;
+        // 다리를 건너는 트럭의 무게의 합
+        int truckWeight = 0;
+        while(!dq.isEmpty()) {
+            time++;
             
-            if(currentWeight+truck_weights[index] <= weight) {
-                bridge.offer(truck_weights[index]);
-                currentWeight += truck_weights[index++];
+            truckWeight -= truck.poll();
+            
+            int cur = dq.peek();
+            
+            if(truckWeight + cur <= weight && truck.size() <= bridge_length) {
+                truck.add(cur);
+                truckWeight += cur;
+                dq.poll();
             } else {
-                bridge.offer(0);
+                truck.add(0);
             }
-        }
-        
-        return answer + bridge_length;
+        }   
+        return time + bridge_length;
     }
 }
