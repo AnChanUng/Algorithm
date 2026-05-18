@@ -10,18 +10,15 @@ import java.io.*;
 */
 class Solution {
   public static void main(String[] args) throws Exception {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    int t = Integer.parseInt(br.readLine());
+    Scanner sc = new Scanner(System.in);
+    int t = sc.nextInt();
 
     for(int test=1; test<=t; test++) {
-      int tn = Integer.parseInt(br.readLine()); // 테스트 케이스 번호
+      int tn = sc.nextInt(); // 테스트 케이스 번호
       int[] arr = new int[101];
 
-      StringTokenizer st = new StringTokenizer(br.readLine());
-      int n = st.countTokens();
-
-      for(int i=0; i<n; i++) {
-        int input = Integer.parseInt(st.nextToken());
+      for(int i=0; i<1000; i++) {
+        int input = sc.nextInt();
         arr[input]++;
       }
 
