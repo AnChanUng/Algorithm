@@ -27,9 +27,11 @@ public class Solution {
 				}
 			}
 			
-			// 가로의 합, 세로의 합
+			// 가로의 합, 세로의 합, 대각선의 합
 			int maxGaro = 0;
 			int maxSero = 0;
+			int leftLine = 0;
+			int rightLine = 0;
 			for(int i=0; i<100; i++) {
 				int sumGaro = 0;
 				int	sumSero = 0;
@@ -39,20 +41,11 @@ public class Solution {
 				}
 				maxGaro = Math.max(maxGaro, sumGaro);
 				maxSero = Math.max(maxSero, sumSero);
+				
+				rightLine += arr[i][99-i];
+				leftLine += arr[i][i];
 			}
 
-			// 대각선의 합
-			// arr[0][99] + arr[1][98] + arr[2][97] .... arr[99][0]
-			int leftLine = 0;
-			int rightLine = 0;
-			for(int i=0; i<100; i++) {
-				rightLine += arr[i][99-i];
-				for(int j=0; j<100; j++) {
-					if(i == j) {
-						leftLine += arr[i][j];
-					}
-				}
-			}
 			// 가로 세로 대각선중에 가장 큰 수 출력
 			int Line = Math.max(leftLine, rightLine);
 			int result = Math.max(Line, Math.max(maxGaro, maxSero));
