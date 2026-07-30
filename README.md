@@ -1,6 +1,6 @@
 ## PS
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=1stevering)](https://solved.ac/1stevering/)
-- 백준/프로그래머스를 Java, Python, C, C++로 풀이한 repository입니다.
+- 백준/프로그래머스/SWEA/리트코드를 Java, Python, C++로 풀이한 repository입니다.
 - 프로그래머스 SQL 문제를 포함하고 있습니다.
 
 ## Algorithm
