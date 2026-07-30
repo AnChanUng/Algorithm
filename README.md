@@ -5,4 +5,4 @@
 
 ## Algorithm
 - [SQL 함수 정리](https://good-abacus-b37.notion.site/SQL-96594075d34a47cb8e1515c93f7d6b60?source=copy_link)
-- [Java 문법](https://github.com/AnChanUng/Algorithm/blob/main/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%EC%9C%A0%ED%98%95%EB%B3%84.md)
+- [Java 문법](https://cookie.tistory.com/166)
