@@ -31,7 +31,7 @@ class Solution {
 
             int section = n / 4;
             
-            String jinsu = br.readLine(); // 1B3B3B81F75E
+            String jinsu = br.readLine();
 
             list1 = new ArrayList<>();
             list2 = new ArrayList<>();
@@ -51,40 +51,20 @@ class Solution {
                     cnt++;
                     if(cnt == section) {
                         int x = Integer.parseInt(str, 16);
-                        //int x = translate(str); // str 16진수를 10진수로 변환
                         if(!list2.contains(x)) {
                             list2.add(x);
                         }
                         str = "";
                         cnt = 0;
                     }
-                }
-
-                // list2 내림차순
-                Collections.sort(list2, Collections.reverseOrder());
-
-                // list1의 마지막 것을 지우고 맨 앞으로 넣기
-                list1.add(0, list1.remove(list1.size()-1));
+                }  
+            	list1.add(0, list1.remove(list1.size()-1));
             }
-            //for(int i=0; i<list2.size(); i++) System.out.println(list2.get(i));
+            Collections.sort(list2, Collections.reverseOrder());
             
             answer = list2.get(k-1);
             sb.append("#").append(tc).append(" ").append(answer).append("\n");
         }
         System.out.println(sb.toString());
     }
-    // static int translate(String str) { // 16진수 -> 10진수 변환함수
-    //     System.out.println("str: " + str);
-    //     int len = str.length();
-    //     int cnt = len;
-    //     int sum = 0; // 10진수로 변환한 수
-    //     for(int i=0; i<len; i++) {
-    //         char ch = str.charAt(i);
-    //         int n = Character.digit(ch, 16);
-    //         sum += Math.pow(16, cnt-1) * n;
-    //         cnt--;
-    //     }
-    //     System.out.println("sum: " + sum);
-    //     return sum;
-    // }
 }
