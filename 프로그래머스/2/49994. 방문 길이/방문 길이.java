@@ -1,29 +1,46 @@
 import java.util.*;
-
-class Solution {
+class Solution { // 좌 하 우 상
+    static boolean[][][] vis;
+    static int cnt;
     public int solution(String dirs) {
-        Set<String> visited = new HashSet<>();
-        int x = 0;
-        int y = 0;
-
-        for (int i = 0; i < dirs.length(); i++) {
-            int nx = x; 
-            int ny = y;
+        vis = new boolean[11][11][2];
+        
+        cnt = 0;
+        move(5, 5, dirs);
+        return cnt;
+    }
+    static void move(int x, int y, String dirs) {
+        int d = 0;
+        for(int i=0; i<dirs.length(); i++) {
             char ch = dirs.charAt(i);
-
-            if (ch == 'U') ny++;
-            else if (ch == 'D') ny--;
-            else if (ch == 'L') nx--;
-            else if (ch == 'R') nx++;
-
-            if (nx < -5 || nx > 5 || ny < -5 || ny > 5) continue;
-
-            visited.add(x + "," + y + "," + nx + "," + ny);
-            visited.add(nx + "," + ny + "," + x + "," + y);
-
+            int nx = 0;
+            int ny = 0;
+            if(ch == 'L') {
+                nx = x - 1; 
+                ny = y;
+                d = 0;
+            } else if (ch == 'R') {
+                nx = x + 1; 
+                ny = y;
+                d = 0;
+            } else if (ch == 'D') {
+                nx = x; 
+                ny = y + 1;
+                d = 1;
+            } else if (ch == 'U') {
+                nx = x; 
+                ny = y - 1;
+                d = 1;
+            }
+            if(nx < 0 || nx >= 11 || ny < 0 || ny >= 11) continue;
+            int ux = Math.min(x, nx);
+            int uy = Math.min(y, ny);
+            if(!vis[ux][uy][d]) {
+                vis[ux][uy][d] = true;
+                cnt++;
+            }
             x = nx;
             y = ny;
         }
-        return visited.size() / 2;
     }
 }
