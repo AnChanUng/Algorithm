@@ -7,35 +7,21 @@ import java.util.*;
 */
 class Solution {
     static int cnt;
-    static int[] arr;
     public int solution(int[] numbers, int target) {
         cnt = 0;
-        arr = new int[numbers.length];
-        dfs(0, numbers, target);
+        dfs(0, 0, numbers, target);
         
         return cnt;
     }
-    static void dfs(int depth, int[] numbers, int target) {
+    static void dfs(int sum, int depth, int[] numbers, int target) {
         if(depth >= numbers.length) {
-            // if(sum == target) {
-            //     for(int x : arr) System.out.print(x + " ");
-            //     //Sytem.out.println("sum: " + sum + " target: " + target);
-            //     System.out.println();
-            //     cnt++;
-            // }
-            int sum = 0;
-            for(int i=0; i<arr.length; i++) {
-                sum += arr[i];
-            }
             if(sum == target) {
                 cnt++;
             }
             return;
         }
         
-        arr[depth] = numbers[depth];
-        dfs(depth+1, numbers, target);
-        arr[depth] = -numbers[depth];
-        dfs(depth+1, numbers, target);
+        dfs(sum + numbers[depth], depth+1, numbers, target);
+        dfs(sum - numbers[depth], depth+1, numbers, target);
     }
 }
