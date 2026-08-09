@@ -1,20 +1,41 @@
 import java.util.*;
-/* 합이 target인  */
+/*
+    nubmers의 숫자들을 양수인경우와 음수인경우의 모든 수를 구하고
+    합이 target일떄 return;
+    0
+    알고리즘: DFS, 부분집합
+*/
 class Solution {
-    static int cnt = 0;
+    static int cnt;
+    static int[] arr;
     public int solution(int[] numbers, int target) {
-        dfs(numbers, 0, 0, target);
+        cnt = 0;
+        arr = new int[numbers.length];
+        dfs(0, numbers, target);
+        
         return cnt;
     }
-    static void dfs(int[] numbers, int sum, int depth, int target) {
-        if(depth == numbers.length) {
+    static void dfs(int depth, int[] numbers, int target) {
+        if(depth >= numbers.length) {
+            // if(sum == target) {
+            //     for(int x : arr) System.out.print(x + " ");
+            //     //Sytem.out.println("sum: " + sum + " target: " + target);
+            //     System.out.println();
+            //     cnt++;
+            // }
+            int sum = 0;
+            for(int i=0; i<arr.length; i++) {
+                sum += arr[i];
+            }
             if(sum == target) {
                 cnt++;
             }
             return;
         }
-
-        dfs(numbers, sum + numbers[depth], depth+1, target);
-        dfs(numbers, sum - numbers[depth], depth+1, target);
+        
+        arr[depth] = numbers[depth];
+        dfs(depth+1, numbers, target);
+        arr[depth] = -numbers[depth];
+        dfs(depth+1, numbers, target);
     }
 }
