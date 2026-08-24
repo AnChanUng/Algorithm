@@ -1,10 +1,11 @@
+# 2022년 10월 16일에 대여중인 자동차 -> '대여중'
+# 2022년 10월 16일에 대여중아닌 자동차 -> '대여가능' AS AVAILABILITY
+# 반납날짜가 2022년 10월16일이어도 대여중
 SELECT CAR_ID, 
-    CASE
-        WHEN MAX(CASE WHEN START_DATE <= '2022-10-16' AND END_DATE >= '2022-10-16' THEN 1 ELSE 0 END) = 1 
-        THEN '대여중'
-        ELSE '대여 가능'
-    END AS AVAILABILITY
+    MAX(CASE
+        WHEN START_DATE <= "2022-10-16" AND END_DATE >= "2022-10-16" THEN "대여중"
+        ELSE "대여 가능"
+    END) AS AVAILABILITY
 FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
--- GROUP BY CAR_ID
 GROUP BY CAR_ID
-ORDER BY CAR_ID DESC # 자동차 ID를 기준으로 내림차순 정렬
+ORDER BY CAR_ID DESC # 자동차ID를 기준으로 내림차순
