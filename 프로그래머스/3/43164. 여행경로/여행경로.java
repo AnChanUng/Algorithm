@@ -1,54 +1,50 @@
 import java.util.*;
 /*
-    tickets[0][0] -> tickets[0][1]
-    1. 항공권을 모두 사용해야함
-    2. 가능한 경로가 2개 이상일 때, 알파벳 순서가 앞서는 경로를 return
+    ICN에서 출발해서 여행경로 짜기
     
-    알고리즘: DFS (graph)
+    알고리즘: DFS 조합 백트래킹
     
+    ICN에서 출발해서 tickets[0][1]로 이동 -> tickets[i][0]로 계속 이동하면서 record 배열에 여행경로 저장
+*/
+import java.util.*;
+/*
+    ICN에서 출발해서 여행경로 짜기
+    
+    알고리즘: DFS 조합 백트래킹
+    
+    ICN에서 출발해서 tickets[0][1]로 이동 -> tickets[i][0]로 계속 이동하면서 record 배열에 여행경로 저장
 */
 class Solution {
+    static String[] order;
     static boolean[] vis;
-    static List<String> list;
     static String[] res;
-    static boolean flag;
     public String[] solution(String[][] tickets) {
+        order = new String[tickets.length+1];
         vis = new boolean[tickets.length];
-        res = new String[tickets.length+1];
-        list = new ArrayList<>();
-        flag = false; // 첫번째 return 값만 출력 나머지는 출력x
-        // 가능한 경로가 2개 이상일 때, 알파벳 순서가 앞서는 경로를 return
-        Arrays.sort(tickets, (a, b) -> {
-            if(a[0].equals(b[0])) {
-                return a[1].compareTo(b[1]);
-            }
-            return a[0].compareTo(b[0]);
-        });
-        list.add("ICN");
-        dfs("ICN", tickets, 1);    
+        
+        Arrays.sort(tickets, (a, b) -> a[1].compareTo(b[1]));
 
+        order[0] = "ICN";
+        dfs("ICN", tickets, 1);
+        
         return res;
     }
-    static void dfs(String str, String[][] tickets, int depth) {
-        if(flag) return;
-        if(depth == tickets.length+1) {
-            for(int i=0; i<list.size(); i++) {
-                res[i] = list.get(i);
-            }
-            flag = true;
+    
+    static void dfs(String start, String[][] tickets, int depth) {
+        if(depth == tickets.length + 1) {
+            res = order;
             return;
         }
+        
         for(int i=0; i<tickets.length; i++) {
+            if(res != null) return;
             if(!vis[i]) {
-                String a = tickets[i][0];
-                String b = tickets[i][1];
-                if(str.equals(a)) {
-                    vis[i] = true;
-                    list.add(b);
-                    dfs(b, tickets, depth+1);
-                    vis[i] = false;
-                    list.remove(list.size()-1);
+                vis[i] = true;
+                if(tickets[i][0].equals(start)) {
+                    order[depth] = tickets[i][1];
+                    dfs(tickets[i][1], tickets, depth+1);
                 }
+                vis[i] = false;
             }
         }
     }
