@@ -1,44 +1,96 @@
 import java.util.*;
+/*
+    장르 별 가장 많이 재생된 노래를 두개씩 모으기
+    
+    노래 수록 기준
+    1. 많이 재생된 장르
+    2. 많이 재싱된 노래
+    3. 고유 번호가 낮은 노래
+    
+    genres: 노래 장르
+    plays: 노래별 재생 횟수
+    
+    많이 재생된 장르: classic -> pop
+    : play[3] -> play[0] -> play[1] => 3, 0
+    : play[4] -> play[1] => 4, 1
+    
+    1. 장르별 전체 재생횟수를 구합니다.
+    2. 많이 재생된 장르, 많이재싱된 노래, 고유번호가 낮은 노래 순으로 정렬합니다.
+*/
 class Solution {
+    class Node implements Comparable<Node> {
+        int genresCount; // 장르별 노래횟수
+        int playsCount; // 노래별 횟수
+        int idx; // 인덱스=고유번호
+        String genres; // 장르이름
+        
+        public Node(int genresCount, int playsCount, int idx, String genres) {
+            this.genresCount = genresCount;
+            this.playsCount = playsCount;
+            this.idx = idx;
+            this.genres = genres;
+        }
+        
+        @Override
+        public int compareTo(Node o) {
+            if(this.genresCount != o.genresCount) { // 장르별 노래횟수내림차순
+                return Integer.compare(o.genresCount, this.genresCount);
+            }
+            if(this.playsCount != o.playsCount) { // 노래별 횟수
+                return Integer.compare(o.playsCount, this.playsCount);
+            }
+            return Integer.compare(this.idx, o.idx);
+        }
+        
+        @Override
+        public String toString() {
+            return genresCount + " " + playsCount + " " + idx + " " + genres;
+        }
+    }  
     public int[] solution(String[] genres, int[] plays) {
-        List<Integer> answer = new ArrayList<>();
-        Map<String, Integer> map = new HashMap<>(); // genres, 플레이횟수 2개까지만 저장
+        HashMap<String, Integer> sing = new HashMap<>(); // 장르별 전체재생횟수
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        ArrayList<Integer> list = new ArrayList<>();
         
-        // 1.장르별 총 재생수 집계
+        // 1. 장르별 전체 재생횟수를 구합니다.
         for(int i=0; i<genres.length; i++) {
-            if(!map.containsKey(genres[i])) {
-                map.put(genres[i], plays[i]);
+            if(!sing.containsKey(genres[i])) {
+                sing.put(genres[i], plays[i]);    
             } else {
-                map.put(genres[i], map.get(genres[i]) + plays[i]);
+                sing.put(genres[i], sing.get(genres[i]) + plays[i]);
             }
         }
         
-        // 2.장르별 곡 목록 저장
-        Map<String, List<int[]>> song = new HashMap<>(); // [재생수, 고유번호]
+        // 장르별 노래횟수, 노래별 횟수, 인덱스=고유번호, 장르이름
         for(int i=0; i<genres.length; i++) {
-            if(!song.containsKey(genres[i])) {
-                song.put(genres[i], new ArrayList<>());
+            int singCnt = 0; // 장르별 노래횟수
+            if(sing.containsKey(genres[i])) {
+                singCnt = sing.get(genres[i]);
+            }    
+            pq.add(new Node(singCnt, plays[i], i, genres[i]));
+        }
+        
+        int cnt = 0;
+        String str = "";
+        while(!pq.isEmpty()) {
+            Node n = pq.poll();
+
+            if(!str.equals(n.genres)) {
+                str = n.genres;
+                cnt = 0;
             }
-            song.get(genres[i]).add(new int[]{plays[i], i});
-        }
-        
-        // 3.장르를 총 재생수 내림차순 정렬
-        List<String> sortedGenres = new ArrayList<>(map.keySet());
-        sortedGenres.sort((a, b) -> map.get(b)-map.get(a));
-        
-        // 4.장르에서 재생수 내림차순 2곡 뽑기
-        for(String genre : sortedGenres) {
-            List<int[]> songs = song.get(genre);
-            songs.sort((a, b) -> Integer.compare(b[0], a[0]));
-            for(int i=0; i<Math.min(2, songs.size()); i++) {
-                answer.add(songs.get(i)[1]);
+            
+            if(cnt < 2) {
+                list.add(n.idx);
+                cnt++;
             }
         }
-        int[] result = new int[answer.size()];
-        for(int i=0; i<answer.size(); i++) {
-            result[i] = answer.get(i);
+        
+        int[] res = new int[list.size()];
+        for(int i=0; i<list.size(); i++) {
+            res[i] = list.get(i);
         }
         
-        return result;
+        return res;
     }
 }
