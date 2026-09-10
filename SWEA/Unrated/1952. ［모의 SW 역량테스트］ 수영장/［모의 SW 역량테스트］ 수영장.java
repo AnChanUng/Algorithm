@@ -51,9 +51,7 @@ class Solution {
     	if(minFee < fee) return;
     	
     	if(depth >= 12) {
-    		if(minFee > fee) {
-    			minFee = fee;
-    		}
+    		minFee = fee;
     		return;
     	}
     	
