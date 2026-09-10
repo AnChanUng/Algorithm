@@ -51,7 +51,9 @@ class Solution {
     	if(minFee < fee) return;
     	
     	if(depth >= 12) {
-    		minFee = Math.min(minFee, fee);
+    		if(minFee > fee) {
+    			minFee = fee;
+    		}
     		return;
     	}
     	
