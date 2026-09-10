@@ -48,6 +48,8 @@ class Solution {
     }
     
     private static void dfs(int depth, int fee) {
+    	if(minFee < fee) return;
+    	
     	if(depth >= 12) {
     		minFee = Math.min(minFee, fee);
     		return;
