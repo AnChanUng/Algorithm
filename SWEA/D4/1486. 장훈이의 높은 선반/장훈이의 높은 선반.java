@@ -1,45 +1,71 @@
 import java.util.*;
-import java.lang.*;
 import java.io.*;
 /*
-    점원의 키들이 합이 선반의 높이이상이 되는 것 중 최소 값
-
-    알고리즘: 부분집합 (완전탐색, 백트래킹)
-    중복없는 조합의 합중 >= b 일때 최소값
-*/
+ *  1 ~ N개를 선택했을 때, 나오는 조합중에서 탑의 높이가 가장 낮은 것 구하기
+ * 
+ 	알고리즘: 조합 dfs
+ 
+ 	dfs
+ 	- 1 ~ n개를 선택하는 경우의 수를 모두 구한다.
+ 	- 선택한 조합을 더했을 때, b보다 높은 것만 구한다.
+ 	- b보다 높은 것 중에 가장 작은 것을 구한다.
+ */
 class Solution {
-    static int n, b;
-    static int[] height;
-    static int minSum;
+	static int[] arr;
+	static boolean[] vis;
+	static int n, b;
+	static int minHeight;
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
-        int T = Integer.parseInt(br.readLine());
+        
+        int t = Integer.parseInt(br.readLine());
 
-        for(int test_case=1; test_case<=T; test_case++) {
+        for(int test_case=1; test_case<=t; test_case++) {
             st = new StringTokenizer(br.readLine());
-            n = Integer.parseInt(st.nextToken()); // 점원수
-            b = Integer.parseInt(st.nextToken()); // 선반의 높이
-
-            height = new int[n];
+            
+            n = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            
+            arr = new int[n];
+            vis = new boolean[n];
+            
             st = new StringTokenizer(br.readLine());
             for(int i=0; i<n; i++) {
-                height[i] = Integer.parseInt(st.nextToken());
+            	arr[i] = Integer.parseInt(st.nextToken());
             }
-            minSum = Integer.MAX_VALUE;
-            dfs(0, 0);
-
-            int result = minSum - b;
-            System.out.println("#" + test_case + " " + result);
+            
+            minHeight = Integer.MAX_VALUE;
+            dfs(0);
+            
+            int result = minHeight - b;
+            
+            sb.append("#").append(test_case).append(" ").append(result).append("\n");
         }
+        System.out.print(sb);
     }
-    static void dfs(int sum, int depth) {
-        if(sum >= b) {
-            minSum = Math.min(minSum, sum);
-            return;
-        }
-        if(depth >= n) return;
-        dfs(sum + height[depth], depth+1);
-        dfs(sum, depth+1);
+   /*
+    * depth: 숫자를 선택한 인덱스 개수
+    */
+    static void dfs(int depth) {
+    	if(depth >= n) {
+    		int sum = 0;
+    		for(int i=0; i<n; i++) {
+    			if(vis[i]) {
+    				sum += arr[i];
+    			}
+    		}
+    		if(sum >= b) {
+    			minHeight = Math.min(minHeight, sum);
+    		}
+    		return;
+    	}
+    	
+    	vis[depth] = true;
+	    dfs(depth+1);
+	    	
+	    vis[depth] = false;
+	    dfs(depth+1);
     }
 }
