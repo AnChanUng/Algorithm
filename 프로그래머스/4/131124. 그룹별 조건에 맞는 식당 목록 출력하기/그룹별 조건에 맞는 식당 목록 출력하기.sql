@@ -1,14 +1,17 @@
 /*
-    가장 많이 쓴 회원 아이디 하나 뽑기
-    - 회원 별 리 뷰 개수 세기
-    - 최대값 구하기
-    가장많이 작성한 사람의 조건 출력
+    리뷰 가장 많이 작성한 회원 조회
+    회원이름, 리뷰텍스트, 리뷰작성일 조회
+    리뷰 작성일 ASC, 리뷰 텍스트 ASC
 */
 SELECT A.MEMBER_NAME, B.REVIEW_TEXT, B.REVIEW_DATE
 FROM MEMBER_PROFILE A JOIN REST_REVIEW B
 ON A.MEMBER_ID = B.MEMBER_ID
-WHERE A.MEMBER_ID = (SELECT MEMBER_ID
-                     FROM REST_REVIEW
-                     GROUP BY MEMBER_ID
-                     ORDER BY COUNT(MEMBER_ID) DESC LIMIT 1)   
+WHERE A.MEMBER_NAME = (
+    SELECT A.MEMBER_NAME
+    FROM MEMBER_PROFILE A JOIN REST_REVIEW B
+    ON A.MEMBER_ID = B.MEMBER_ID
+    GROUP BY A.MEMBER_NAME
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
+)
 ORDER BY B.REVIEW_DATE, B.REVIEW_TEXT
