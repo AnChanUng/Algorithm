@@ -27,10 +27,6 @@ class Solution {
             for(int j=0; j<skill_trees[i].length(); j++) {
                 char ch = skill_trees[i].charAt(j);
 
-                // 2.1 첫번째 값이 나오면 skill의 두번째 값이 나와야함 
-                // 2.2 첫번째 값이 안나오면 return false;
-                // 2.3 마지막 값 까지 돌면 cnt++
-                //System.out.println("ch: " + ch + " map.get(ch): " + map.get(ch));
                 if(map.containsKey(ch)) {
                     if(map.get(ch) == index) {
                         index++;
