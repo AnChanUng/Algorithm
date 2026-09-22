@@ -1,8 +1,4 @@
 import java.util.*;
-/*
-    10분만에 방을 줄 수 없으면 새로운 룸 생성
-    룸의 개수
-*/
 class Solution {
     public int solution(String[][] book_time) {
         int room = 0;
@@ -49,7 +45,6 @@ class Solution {
                 pq.offer(bookTime[i][1]);    
             }
         }
-        
         return pq.size();
     }
 }
