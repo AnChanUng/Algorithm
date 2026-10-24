@@ -1,74 +1,70 @@
 import java.util.*;
-
 class Solution {
-    static final int[] dx = {-1, 0, 1, 0};
-    static final int[] dy = {0, -1, 0, 1};
+    static int[] dx = {0, 1, 0, -1};
+    static int[] dy = {1, 0, -1, 0};
+    static int[][] Board;
     static int[][][] dist;
-    static int n;
-    static int minTotal;
-
+    static int n, m;
     static class Node implements Comparable<Node> {
-        int x, y, cost, direction;
-
-        Node(int x, int y, int cost, int direction) {
+        int x, y, d, cost;
+        
+        Node(int x, int y, int d, int cost) {
             this.x = x;
             this.y = y;
+            this.d = d;
             this.cost = cost;
-            this.direction = direction;
         }
-
+        
         public int compareTo(Node o) {
             return Integer.compare(this.cost, o.cost);
         }
     }
-
+    
     public int solution(int[][] board) {
-        minTotal = Integer.MAX_VALUE;
         n = board.length;
+        m = board[0].length;
+        
+        Board = board;
+        dijkstra(0, 0);
 
-        dijkstra(0, 0, board);
-
+        int minNum = Integer.MAX_VALUE;
         for(int i=0; i<4; i++) {
-            minTotal = Math.min(minTotal, dist[n-1][n-1][i]);
+            minNum = Math.min(dist[n-1][m-1][i], minNum);
         }
-
-        return minTotal;
+        
+        return minNum;
     }
-
-    static void dijkstra(int x, int y, int[][] board) {
-        dist = new int[n][n][4];
-
+    
+    private static void dijkstra(int x, int y) {
+        dist = new int[n][m][4];
         for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
+            for(int j=0; j<m; j++) {
                 Arrays.fill(dist[i][j], Integer.MAX_VALUE);
             }
         }
-
+        
         PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.offer(new Node(x, y, 0, -1));
-
+        pq.offer(new Node(x, y, -1, 0));
         while(!pq.isEmpty()) {
             Node cur = pq.poll();
-
-            if(cur.direction != -1 &&
-               cur.cost > dist[cur.x][cur.y][cur.direction]) continue;
-
+            if(cur.x == n-1 && cur.y == m-1) break;
             for(int dir=0; dir<4; dir++) {
                 int nx = cur.x + dx[dir];
                 int ny = cur.y + dy[dir];
+                
+                if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+                if(Board[nx][ny] == 1) continue;
 
-                if(nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
-                if(board[nx][ny] == 1) continue;
-
-                int nCost = cur.cost + 100;
-
-                if(cur.direction != -1 && dir != cur.direction) {
-                    nCost += 500;
+                int nextCost = 100;
+                
+                if(cur.d != -1 && cur.d != dir) {
+                    nextCost += 500;
                 }
-
-                if(nCost < dist[nx][ny][dir]) {
-                    dist[nx][ny][dir] = nCost;
-                    pq.offer(new Node(nx, ny, nCost, dir));
+                
+                int totalCost = cur.cost + nextCost;
+                if(totalCost < dist[nx][ny][dir]) {
+                    dist[nx][ny][dir] = totalCost;
+                    pq.offer(new Node(nx, ny, dir, totalCost));
                 }
             }
         }
