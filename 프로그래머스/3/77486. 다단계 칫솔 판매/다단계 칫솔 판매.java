@@ -27,15 +27,14 @@ class Solution {
 
         n = enroll.length;
 
-        HashMap<String, Integer> map = new HashMap<>();
-
+        parent = new int[n];
+        answer = new int[n];
+        
         // 판매원 이름 → 인덱스
+        HashMap<String, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
             map.put(enroll[i], i);
         }
-
-        parent = new int[n];
-        answer = new int[n];
 
         // 판매원 → 추천인 연결
         for (int i = 0; i < n; i++) {
