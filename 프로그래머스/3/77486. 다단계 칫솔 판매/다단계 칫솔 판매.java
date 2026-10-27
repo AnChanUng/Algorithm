@@ -1,56 +1,67 @@
 import java.util.*;
 /*
-    이익의 10% -> 추천인
+    각 판매원이 득한 이익금을 배열로 출력
+  
+    알고리즘:
+  
+    enroll: 판매원 이름
+    referral: 각 판매원을 다단계 조직에 참여시킨 다른 판매원의 이름
+    seller: 판매원 이름
+    amount: 판매 수량 
     
-    예외
-    : if (이익의 10%가 1원미만) -> x
-    : else 이익의 10% -> 추천인은
+    referral -> enroll (아래로)
     
-    알고리즘: DFS
-    
-    1. seller의 판매량을 hash로 만든다 Hash<seller, amount * 100>
-    2. roop
-     2.1 enroll[i]의 사람이 hash에 있으면
-      2.1.1 판매자의 추천인 있으면 판매량의 10%를 추천인으로 저장
-      2.1.2 판매자의 추천이 없으면 판매량 저장
-     2.2 enroll[i]의 사람이 hash에 없으면 continue
+    1. referral에서 enroll로 가는 인접리스트 생성
+    2. seller[i] * amount[i]해서 이익금 배열 생성 
+      - Hash(이름, 이익금)
+    3. 인접리스트에서 본인의 10%는 레퍼럴에게 넘기고 나머지 본인 저장
+      - 10%가 1원미만일 경우는 넘기지 않음
 */
-class Solution { // 판매원이름, 다른 판매원이름, 판매량 집계 데이터의 판매원 이름
-    static int[] result;
-    static Map<String, Integer> totalMoney; 
-    public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
-        totalMoney = new HashMap<>();
-        result = new int[enroll.length];
-        
-        for(int i=0; i<enroll.length; i++) {
-            if(!totalMoney.containsKey(enroll[i])) {
-               totalMoney.put(enroll[i], 0);
-            }
-        }
-        
-        for(int i=0; i<seller.length; i++) {
-            recommend(seller[i], amount[i] * 100, enroll, referral);
-        }
-        
-        for(int i=0; i<enroll.length; i++) {       
-            result[i] = totalMoney.get(enroll[i]);
-        }
-        
-        return result;
-    }
+import java.util.*;
 
-    static void recommend(String referralName, int money, String[] enroll, String[] referral) {
-        int cost = money / 10;
-        totalMoney.put(referralName, totalMoney.get(referralName) + money - cost);
-        
-        if(cost <= 0) { return; }
-        
-        for(int i=0; i<enroll.length; i++) {
-            if(enroll[i].equals(referralName)) {
-                if(referral[i].equals("-")) { return; }
-                recommend(referral[i], cost, enroll, referral);
-                return;
+class Solution {
+    static int[] parent;
+    static int[] answer;
+    static int n;
+    public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
+
+        n = enroll.length;
+
+        HashMap<String, Integer> map = new HashMap<>();
+
+        // 판매원 이름 → 인덱스
+        for (int i = 0; i < n; i++) {
+            map.put(enroll[i], i);
+        }
+
+        parent = new int[n];
+        answer = new int[n];
+
+        // 판매원 → 추천인 연결
+        for (int i = 0; i < n; i++) {
+            if (referral[i].equals("-")) {
+                parent[i] = -1;
+            } else {
+                parent[i] = map.get(referral[i]);
             }
         }
+
+        // 모든 판매 기록 처리
+        for (int i = 0; i < seller.length; i++) {
+            int idx = map.get(seller[i]);
+            int money = amount[i] * 100;
+
+            while (idx != -1 && money > 0) {
+                int give = money / 10;
+                int keep = money - give;
+
+                answer[idx] += keep;
+
+                money = give;
+                idx = parent[idx];
+            }
+        }
+
+        return answer;
     }
 }
