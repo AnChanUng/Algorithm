@@ -16,26 +16,20 @@ class Solution {
         
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         
-        for(int i=0; i<works.length; i++) {
+        for(int i=0; i<works.length; i++) 
             pq.offer(works[i]);
-        }
         
-        while(n > 0) {
+        while(n --> 0) {
             int cur = pq.poll();
-            if(cur == 0) {
-                answer = 0;
-                break;
-            }
-            n--;
+            if(cur == 0) return answer;
             cur--;
             pq.offer(cur);
         }
         
-        while(!pq.isEmpty()) {
-            int cur = pq.poll();
-            answer += Math.pow(cur, 2);
+        while(!pq.isEmpty()) { 
+            answer += Math.pow(pq.poll(), 2);
         }
-        
+            
         return answer;
     }
 }
