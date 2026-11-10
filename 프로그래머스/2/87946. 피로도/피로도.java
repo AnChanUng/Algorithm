@@ -15,27 +15,28 @@ class Solution {
     static boolean[] vis;
     static int maxDepth;
     public int solution(int k, int[][] dungeons) {
-        int answer = -1;
         this.dungeons = dungeons;
         
-        maxDepth = -1;
+        maxDepth = 0;
         vis = new boolean[dungeons.length];
+        
         dfs(0, k);
         
         return maxDepth;
     }
 
     private static void dfs(int depth, int perodo) {
-        if(maxDepth < depth) {
-            maxDepth = Math.max(maxDepth, depth);
-        }
+        maxDepth = Math.max(maxDepth, depth);
         
         for(int i=0; i<dungeons.length; i++) {
+            if(vis[i]) continue;
+            
             int wantPerodo = dungeons[i][0];
             int spendPerodo = dungeons[i][1];
+            
             int curPerodo = perodo - spendPerodo; 
+            
             if(perodo >= wantPerodo && curPerodo >= 0) {
-                if(vis[i]) continue;
                 vis[i] = true;
                 dfs(depth+1, curPerodo);
                 vis[i] = false;
