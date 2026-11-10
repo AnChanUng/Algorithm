@@ -34,9 +34,7 @@ class Solution {
             int wantPerodo = dungeons[i][0];
             int spendPerodo = dungeons[i][1];
             int curPerodo = perodo - spendPerodo; 
-            //System.out.println("depth: " + depth + " perodo: " + perodo);
             if(perodo >= wantPerodo && curPerodo >= 0) {
-                //System.out.println("depth: " + depth + " perodo: " + perodo + " curPerodo: " + curPerodo);
                 if(vis[i]) continue;
                 vis[i] = true;
                 dfs(depth+1, curPerodo);
