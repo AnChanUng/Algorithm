@@ -38,14 +38,14 @@ class Solution {
         while (!pq.isEmpty()) {
             Node cur = pq.poll();
 
-            if (cur.time > dist[cur.alp][cur.cop]) continue;
-
-            if (cur.alp == maxAlp && cur.cop == maxCop) {
+            if(cur.time > dist[cur.alp][cur.cop]) continue;
+            
+            if(cur.alp == maxAlp && cur.cop == maxCop) {
                 return cur.time;
             }
 
             // 1. 알고력 공부
-            if (cur.alp < maxAlp) {
+            if(cur.alp < maxAlp) {
                 int na = cur.alp + 1;
                 int nc = cur.cop;
                 int nt = cur.time + 1;
@@ -57,12 +57,12 @@ class Solution {
             }
 
             // 2. 코딩력 공부
-            if (cur.cop < maxCop) {
+            if(cur.cop < maxCop) {
                 int na = cur.alp;
                 int nc = cur.cop + 1;
                 int nt = cur.time + 1;
 
-                if (nt < dist[na][nc]) {
+                if(nt < dist[na][nc]) {
                     dist[na][nc] = nt;
                     pq.offer(new Node(na, nc, nt));
                 }
@@ -70,13 +70,13 @@ class Solution {
 
             // 3. 문제 풀기
             for (int[] p : problems) {
-                if (cur.alp < p[0] || cur.cop < p[1]) continue;
+                if(cur.alp < p[0] || cur.cop < p[1]) continue;
 
                 int na = Math.min(maxAlp, cur.alp + p[2]);
                 int nc = Math.min(maxCop, cur.cop + p[3]);
                 int nt = cur.time + p[4];
 
-                if (nt < dist[na][nc]) {
+                if(nt < dist[na][nc]) {
                     dist[na][nc] = nt;
                     pq.offer(new Node(na, nc, nt));
                 }
